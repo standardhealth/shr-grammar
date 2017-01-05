@@ -9,7 +9,6 @@ version = '0.1'
 sourceCompatibility = '1.8'
 
 mainClassName = 'org.mitre.shr.antlr.ParseTool'
-run.args = ["${projectDir}/spec/"]
 
 repositories {
     mavenCentral()

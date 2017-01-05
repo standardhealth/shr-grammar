@@ -1,7 +1,8 @@
 .gradle
-shr_spec.iws
+shr-grammar.iws
 out
 /bin/
+/gen/
 /src/generated
 /src/main/antlr/SHRLexer.tokens
 build/

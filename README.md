@@ -2,13 +2,12 @@
 
 The Standard Health Record Initiative is working to create a single, high-quality health record for every individual in the United States.  For more information, see [standardhealthrecord.org](http://standardhealthrecord.org/).
 
-This GitHub repository represents an evolving computable definition of the Standard Health Record and its contents.  It represents SHR entries and data elements via a custom [ANTLR4](http://www.antlr.org/) grammar designed to be both author-friendly and machine-readable.  The custom grammar and SHR definitions are works in progress and subject to change.
+This GitHub repository provides a custom [ANTLR4](http://www.antlr.org/) grammar for the SHR SIMPL format used to represent namespaces, elements, valuesets, and mappings.  The custom grammar continues to evolve and is subject to change.
 
 # Project Structure
 
     ├── build            # contains build artifacts (temporary)
     ├── gradle           # contains files needed by the gradle wrapper build system
-    ├── spec             # contains SHR specification definitions
     └── src
         ├── generated    # contains ANTLR-generated Java parser/lexer code
         ├── main
@@ -32,16 +31,10 @@ To clean up the build artifacts:
 
 The `ParseTool` application is a simple tool that parses an SHR file or a folder of SHR files.  The `ParseTool` will print out all syntactical errors where files don't conform to the ANLTR SHR specification.  This is useful during the development of SHR text files to ensure they are syntactically valid.  It does _not_, however, ensure correctness of references between elements, valid valuesets or codes, etc.
 
-To execute the sample code using `gradlew`, you should execute the `run` command:
-
-    ./gradlew run
-
-This will execute the `ParseTool` application on the SHR definitions found in `./spec/` (as configured in the `build.gradle` file).
-
 To execute the parse tree on an arbitrary SHR folder or definition file, you must first use gradle to generate a script:
 
     ./gradlew installDist
 
 Then execute the generated script, passing in a path to an SHR folder or definition file:
 
-    ./build/install/shr_spec/bin/shr_spec ./spec/shr_core.txt
+    ./build/install/shr-grammar/bin/shr-grammar ../shr_spec/spec

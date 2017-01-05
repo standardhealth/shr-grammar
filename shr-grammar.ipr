@@ -53,7 +53,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/shr_spec.iml" filepath="$PROJECT_DIR$/shr_spec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shr-grammar.iml" filepath="$PROJECT_DIR$/shr-grammar.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
