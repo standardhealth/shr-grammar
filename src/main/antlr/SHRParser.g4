@@ -2,7 +2,7 @@ parser grammar SHRParser;
 
 options { tokenVocab=SHRLexer; }
 
-shr:                dataDefsDoc | valuesetDefsDoc /* | contentProfiles*/;
+shr:                dataDefsDoc | valuesetDefsDoc | mappingsDoc /* | contentProfiles*/;
 
 // DATA DEFINITIONS (Vocabularies, Entries, Elements)
 
@@ -16,7 +16,7 @@ defaultPathDef:     KW_PATH URL;
 pathDef:            KW_PATH ALL_CAPS EQUAL URL;
 
 vocabularyDefs:     vocabularyDef+;
-vocabularyDef:      KW_VOCABULARY ALL_CAPS EQUAL (URL | URN_OID);
+vocabularyDef:      KW_VOCABULARY ALL_CAPS EQUAL (URL | URN_OID | URN);
 
 dataDefs:           dataDef*;
 dataDef:            elementDef | entryDef;
@@ -41,7 +41,7 @@ field:              countedField (KW_OR countedField)*;
 countedField:       count (fieldType | OPEN_PAREN fieldType (KW_OR fieldType)* CLOSE_PAREN);
 fieldType:          simpleOrFQName | ref | elementWithConstraint | tbd;
 
-basedOnProp:        KW_BASED_ON simpleOrFQName;
+basedOnProp:        KW_BASED_ON (simpleOrFQName | tbd);
 conceptProp:        KW_CONCEPT (tbd | concepts);
 concepts:           fullyQualifiedCode (COMMA fullyQualifiedCode)*;
 descriptionProp:    KW_DESCRIPTION STRING;
@@ -63,6 +63,24 @@ valuesetFrom:           KW_INCLUDES_CODES_FROM fullyQualifiedCode;
 valuesetProps:      valuesetProp+;
 valuesetProp:       conceptProp | descriptionProp;
 
+// MAPPINGS
+
+mappingsDoc:        mappingsHeader targetStatement mappingDefs;
+mappingsHeader:     KW_MAP namespace;
+targetStatement:    KW_TARGET simpleName;
+
+mappingDefs:        mappingDef*;
+mappingDef:         mappingDefHeader fieldMapping*;
+mappingDefHeader:   simpleName (KW_MAPS_TO simpleName)? COLON;
+
+fieldMapping:       fieldToFieldMapping | urlMapping | cardMapping;
+fieldToFieldMapping:source KW_MAPS_TO target;
+source:             sourcePart (DOT sourcePart)* (OPEN_BRACKET source CLOSE_BRACKET)?;
+sourcePart:         simpleOrFQName | primitive | tbd;
+target:             targetPart (DOT targetPart)* (OPEN_BRACKET target CLOSE_BRACKET)?;
+targetPart:         LOWER_WORD | DOT_SEPARATED_LW /*yuck*/ | UPPER_WORD | ALL_CAPS | primitive;
+urlMapping:         source KW_MAPS_TO URL;
+cardMapping:        targetPart KW_IS count;
 
 // CONTENT PROFILES: TODO -- May Be a Separate Grammar
 
@@ -77,12 +95,13 @@ code:               CODE STRING?;
 fullyQualifiedCode: ALL_CAPS code;
 codeFromVS:         (KW_CODE_FROM | KW_CODING_FROM) valueset;
 elementWithConstraint:      simpleOrFQName (DOT simpleName)* elementConstraint;
-elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementTypeConstraint | elementWithUnitsConstraint;
+elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementTypeConstraint | elementWithUnitsConstraint;
 elementCodeVSConstraint:    KW_WITH codeFromVS;
-elementCodeValueConstraint: KW_IS fullyQualifiedCode;
-elementTypeConstraint:      KW_IS simpleOrFQName;
+elementCodeValueConstraint: KW_IS (fullyQualifiedCode | tbd);
+elementIncludesCodeValueConstraint: KW_INCLUDES fullyQualifiedCode;
+elementTypeConstraint:      KW_IS (simpleOrFQName | tbd);
 elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
-valueset:           URL | PATH_URL | URN_OID | simpleName;
+valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
                     | KW_DATE_TIME | KW_TIME | KW_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
                     | KW_POSITIVE_INT;

@@ -27,6 +27,17 @@ To clean up the build artifacts:
 
     ./gradlew clean
 
+# Generating the Javascript Parser Files
+
+By default, this project generates Java classes for parsing SHR text files.  This project can also generate Javascript classes and functions for parsing SHR text.  To create the Javascript parsers, execute the following command from within this directory:
+
+    ./gradlew generateAntlrJSGrammarSource
+
+This will generate the javascript into the _build/javascript/parsers_ folder.  To generate it into a different location use the `shr.js.parsers.dir` project property, as demonstrated below:
+
+    ./gradlew -Pshr.js.parsers.dir=../shr-text-import/lib/parsers generateAntlrJSGrammarSource
+
+
 # Parsing SHR Text Files
 
 The `ParseTool` application is a simple tool that parses an SHR file or a folder of SHR files.  The `ParseTool` will print out all syntactical errors where files don't conform to the ANLTR SHR specification.  This is useful during the development of SHR text files to ensure they are syntactically valid.  It does _not_, however, ensure correctness of references between elements, valid valuesets or codes, etc.
