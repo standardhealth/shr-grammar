@@ -1,20 +1,22 @@
 lexer grammar SHRLexer;
 
 // KEYWORDS for SHR
-KW_DATA_DEFINITIONS:'DataDefinitions:';
+KW_GRAMMAR:         'Grammar:';
+KW_G_DATA_ELEMENT:  'DataElement';
+KW_G_VALUE_SET:     'ValueSet';
+KW_G_MAP:           'Map';
+KW_NAMESPACE:       'Namespace:';
 KW_USES:            'Uses:';
 KW_PATH:            'Path:';
-KW_VOCABULARY:      'Vocabulary:';
+KW_VOCABULARY:      'CodeSystem:'; // Don't rename token for now (it will cause merge conflicts w/ other work)
 KW_ELEMENT:         'Element:';
 KW_ENTRY_ELEMENT:   'EntryElement:';
 KW_BASED_ON:        'Based on:';
 KW_VALUE:           'Value:';
-KW_VALUESET_DEFINITIONS: 'ValueSetDefinitions:';
 KW_VALUESET:        'ValueSet:';
 KW_INCLUDES_CODES_FROM: 'Includes codes from';
 KW_INCLUDES_CODES_DESCENDING_FROM: 'Includes codes descending from';
 KW_AND_NOT_DESCENDING_FROM: 'and not descending from';
-KW_MAP:             'Map:';
 KW_TARGET:          'Target:';
 KW_MAPS_TO:         'maps to';
 KW_CONCEPT:         'Concept:';
@@ -24,6 +26,8 @@ KW_OR:              'or';
 KW_WITH:            'with';
 KW_IS:              'is';
 KW_INCLUDES:        'includes';
+KW_TRUE:            'true';
+KW_FALSE:           'false';
 KW_TBD:             'TBD';
 
 // KEYWORDS for FHIR Primitives

@@ -4,10 +4,10 @@ options { tokenVocab=SHRLexer; }
 
 shr:                dataDefsDoc | valuesetDefsDoc | mappingsDoc /* | contentProfiles*/;
 
-// DATA DEFINITIONS (Vocabularies, Entries, Elements)
+// DATA DEFINITIONS (Grammar: DataElement)
 
-dataDefsDoc:        dataDefsHeader usesStatement? pathDefs? vocabularyDefs? dataDefs;
-dataDefsHeader:     KW_DATA_DEFINITIONS namespace;
+dataDefsDoc:        dataDefsHeader descriptionProp? usesStatement? pathDefs? vocabularyDefs? dataDefs;
+dataDefsHeader:     KW_GRAMMAR KW_G_DATA_ELEMENT version KW_NAMESPACE namespace;
 
 usesStatement:      KW_USES namespace (COMMA namespace)*;
 
@@ -30,7 +30,7 @@ entryHeader:        KW_ENTRY_ELEMENT simpleName;
 elementProps:       elementProp+;
 elementProp:        basedOnProp | conceptProp | descriptionProp;
 
-values:             (value field*) | (value? field+);
+values:             value? field*;
 
 value:              KW_VALUE (uncountedValue | countedValue);
 uncountedValue:     (valueType (KW_OR valueType)*) | (OPEN_PAREN valueType (KW_OR valueType)* CLOSE_PAREN);
@@ -38,7 +38,7 @@ countedValue:       count valueType | count OPEN_PAREN valueType (KW_OR valueTyp
 valueType:          simpleOrFQName | ref | primitive | codeFromVS | elementWithConstraint | tbd;
 
 field:              countedField (KW_OR countedField)*;
-countedField:       count (fieldType | OPEN_PAREN fieldType (KW_OR fieldType)* CLOSE_PAREN);
+countedField:       count? (fieldType | OPEN_PAREN fieldType (KW_OR fieldType)* CLOSE_PAREN);
 fieldType:          simpleOrFQName | ref | elementWithConstraint | tbd;
 
 basedOnProp:        KW_BASED_ON (simpleOrFQName | tbd);
@@ -46,10 +46,10 @@ conceptProp:        KW_CONCEPT (tbd | concepts);
 concepts:           fullyQualifiedCode (COMMA fullyQualifiedCode)*;
 descriptionProp:    KW_DESCRIPTION STRING;
 
-// VALUESET DEFINITIONS
+// VALUESET DEFINITIONS (Grammar: ValueSet)
 
 valuesetDefsDoc:    valuesetDefsHeader usesStatement? pathDefs? vocabularyDefs? valuesetDefs;
-valuesetDefsHeader: KW_VALUESET_DEFINITIONS namespace;
+valuesetDefsHeader: KW_GRAMMAR KW_G_VALUE_SET version KW_NAMESPACE  namespace;
 
 valuesetDefs:           valuesetDef*;
 valuesetDef:            valuesetHeader valuesetProps? valuesetValues?;
@@ -63,10 +63,10 @@ valuesetFrom:           KW_INCLUDES_CODES_FROM fullyQualifiedCode;
 valuesetProps:      valuesetProp+;
 valuesetProp:       conceptProp | descriptionProp;
 
-// MAPPINGS
+// MAPPINGS (Grammar: Map)
 
 mappingsDoc:        mappingsHeader targetStatement mappingDefs;
-mappingsHeader:     KW_MAP namespace;
+mappingsHeader:     KW_GRAMMAR KW_G_MAP version KW_NAMESPACE  namespace;
 targetStatement:    KW_TARGET simpleName;
 
 mappingDefs:        mappingDef*;
@@ -86,6 +86,7 @@ cardMapping:        targetPart KW_IS count;
 
 // COMMON BITS
 
+version:            WHOLE_NUMBER DOT WHOLE_NUMBER;
 namespace:          LOWER_WORD | DOT_SEPARATED_LW;
 simpleName:         UPPER_WORD | ALL_CAPS;
 fullyQualifiedName: DOT_SEPARATED_UW;
@@ -93,12 +94,20 @@ simpleOrFQName:     simpleName | fullyQualifiedName;
 ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
 code:               CODE STRING?;
 fullyQualifiedCode: ALL_CAPS code;
+codeOrFQCode:       fullyQualifiedCode | code | tbd;
 codeFromVS:         (KW_CODE_FROM | KW_CODING_FROM) valueset;
-elementWithConstraint:      simpleOrFQName (DOT simpleName)* elementConstraint;
-elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementTypeConstraint | elementWithUnitsConstraint;
+
+//elementWithConstraint
+
+
+
+elementWithConstraint:      (simpleOrFQName | elementPath | primitive) elementConstraint?;
+elementPath:                simpleOrFQName (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
+elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | /*elementIncludesTypeConstraint |*/ elementWithUnitsConstraint;
 elementCodeVSConstraint:    KW_WITH codeFromVS;
-elementCodeValueConstraint: KW_IS (fullyQualifiedCode | tbd);
-elementIncludesCodeValueConstraint: KW_INCLUDES fullyQualifiedCode;
+elementCodeValueConstraint: KW_IS codeOrFQCode;
+elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
+elementBooleanConstraint:   KW_IS (KW_TRUE | KW_FALSE);
 elementTypeConstraint:      KW_IS (simpleOrFQName | tbd);
 elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
