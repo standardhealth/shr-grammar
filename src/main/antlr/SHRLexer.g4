@@ -25,10 +25,13 @@ KW_REF:             'ref';
 KW_OR:              'or';
 KW_WITH:            'with';
 KW_IS:              'is';
+KW_IS_TYPE:         'is type';
+KW_VALUE_IS_TYPE:   'value is type';
 KW_INCLUDES:        'includes';
 KW_TRUE:            'true';
 KW_FALSE:           'false';
 KW_TBD:             'TBD';
+KW_TBD_CODE:        'TBD#TBD';
 
 // KEYWORDS for FHIR Primitives
 KW_BOOLEAN:         'boolean';

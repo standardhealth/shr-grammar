@@ -93,13 +93,11 @@ fullyQualifiedName: DOT_SEPARATED_UW;
 simpleOrFQName:     simpleName | fullyQualifiedName;
 ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
 code:               CODE STRING?;
-fullyQualifiedCode: ALL_CAPS code;
-codeOrFQCode:       fullyQualifiedCode | code | tbd;
+fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
+codeOrFQCode:       fullyQualifiedCode | code;
 codeFromVS:         (KW_CODE_FROM | KW_CODING_FROM) valueset;
 
 //elementWithConstraint
-
-
 
 elementWithConstraint:      (simpleOrFQName | elementPath | primitive) elementConstraint?;
 elementPath:                simpleOrFQName (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
@@ -108,7 +106,7 @@ elementCodeVSConstraint:    KW_WITH codeFromVS;
 elementCodeValueConstraint: KW_IS codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
 elementBooleanConstraint:   KW_IS (KW_TRUE | KW_FALSE);
-elementTypeConstraint:      KW_IS (simpleOrFQName | tbd);
+elementTypeConstraint:      (KW_IS_TYPE | KW_VALUE_IS_TYPE) (simpleOrFQName | tbd);
 elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
@@ -116,3 +114,4 @@ primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | 
                     | KW_POSITIVE_INT;
 count:              WHOLE_NUMBER RANGE (WHOLE_NUMBER | STAR);
 tbd:                KW_TBD STRING?;
+tbdCode:            KW_TBD_CODE STRING?;
