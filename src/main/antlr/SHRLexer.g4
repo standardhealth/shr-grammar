@@ -17,8 +17,6 @@ KW_VALUESET:        'ValueSet:';
 KW_INCLUDES_CODES_FROM: 'Includes codes from';
 KW_INCLUDES_CODES_DESCENDING_FROM: 'Includes codes descending from';
 KW_AND_NOT_DESCENDING_FROM: 'and not descending from';
-KW_TARGET:          'Target:';
-KW_MAPS_TO:         'maps to';
 KW_CONCEPT:         'Concept:';
 KW_DESCRIPTION:     'Description:';
 KW_REF:             'ref';
@@ -52,9 +50,15 @@ KW_UNSIGNED_INT:    'unsignedInt';
 KW_POSITIVE_INT:    'positiveInt';
 
 // KEYWORDS for types w/ qualifiers
-KW_CODE_FROM:   'code from';
-KW_CODING_FROM: 'Coding from';
-KW_UNITS:       'units';
+KW_CODE_FROM:       'code from';
+KW_CODING_FROM:     'Coding from';
+KW_UNITS:           'units';
+
+// KEYWORDS for mapping
+KW_TARGET:          'Target:';
+KW_MAPS_TO:         'maps to' -> pushMode(MAPPING_TARGET);
+KW_CONSTRAIN:       'constrain' -> pushMode(MAPPING_TARGET);
+KW_TO:              'to';
 
 // SYMBOLS
 DOT:                '.';
@@ -83,7 +87,11 @@ DOT_SEPARATED_UW:   [a-z][0-9a-zA-Z\\-]* ('.' [a-z][0-9a-zA-z\\-]*)* ('.' [A-Z][
 STRING:             '"' (~[\\"])* '"';
 
 // THINGS WE GENERALLY IGNORE
-WS:                 (' ' | '\r' | '\t') -> channel(HIDDEN);
-NEWLINE:            ('\n') -> channel(HIDDEN);
+WS:                 [ \r\t] -> channel(HIDDEN);
+NEWLINE:            '\n' -> channel(HIDDEN);
 COMMENT:            '/*' .*? '*/' -> skip;
 LINE_COMMENT:       '//' ~[\r\n]* -> skip;
+
+mode MAPPING_TARGET;
+TARGET_PHRASE: ~[ \r\t\n]* ~[ \r\t\n:] -> popMode;
+WS2: [ \r\t\n]+ -> channel(HIDDEN);

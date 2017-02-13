@@ -70,17 +70,15 @@ mappingsHeader:     KW_GRAMMAR KW_G_MAP version KW_NAMESPACE  namespace;
 targetStatement:    KW_TARGET simpleName;
 
 mappingDefs:        mappingDef*;
-mappingDef:         mappingDefHeader fieldMapping*;
-mappingDefHeader:   simpleName (KW_MAPS_TO simpleName)? COLON;
+mappingDef:         mappingDefHeader mappingRule*;
+mappingDefHeader:   simpleName (KW_MAPS_TO TARGET_PHRASE)? COLON;
 
-fieldMapping:       fieldToFieldMapping | urlMapping | cardMapping;
-fieldToFieldMapping:source KW_MAPS_TO target;
-source:             sourcePart (DOT sourcePart)* (OPEN_BRACKET source CLOSE_BRACKET)?;
-sourcePart:         simpleOrFQName | primitive | tbd;
-target:             targetPart (DOT targetPart)* (OPEN_BRACKET target CLOSE_BRACKET)?;
-targetPart:         LOWER_WORD | DOT_SEPARATED_LW /*yuck*/ | UPPER_WORD | ALL_CAPS | primitive;
-urlMapping:         source KW_MAPS_TO URL;
-cardMapping:        targetPart KW_IS count;
+mappingRule:        fieldMapping | cardMapping;
+fieldMapping:       source KW_MAPS_TO TARGET_PHRASE;
+source:             sourcePart (DOT sourcePart)*;
+sourcePart:         sourceWord (OPEN_BRACKET sourceWord CLOSE_BRACKET)*;
+sourceWord:         simpleOrFQName | primitive | tbd;
+cardMapping:        KW_CONSTRAIN TARGET_PHRASE KW_TO count;
 
 // CONTENT PROFILES: TODO -- May Be a Separate Grammar
 
