@@ -52,6 +52,7 @@ KW_POSITIVE_INT:    'positiveInt';
 // KEYWORDS for types w/ qualifiers
 KW_CODE_FROM:       'code from';
 KW_CODING_FROM:     'Coding from';
+KW_CODEABLECONCEPT_FROM: 'CodeableConcept from';
 KW_UNITS:           'units';
 
 // KEYWORDS for mapping
