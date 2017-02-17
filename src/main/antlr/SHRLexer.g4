@@ -48,6 +48,7 @@ KW_ID:              'id';
 KW_MARKDOWN:        'markdown';
 KW_UNSIGNED_INT:    'unsignedInt';
 KW_POSITIVE_INT:    'positiveInt';
+KW_XHTML:           'xhtml';
 
 // KEYWORDS for types w/ qualifiers
 KW_CODE_FROM:       'code from';

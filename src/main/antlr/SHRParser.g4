@@ -109,7 +109,7 @@ elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
                     | KW_DATE_TIME | KW_TIME | KW_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
-                    | KW_POSITIVE_INT;
+                    | KW_POSITIVE_INT | KW_XHTML;
 count:              WHOLE_NUMBER RANGE (WHOLE_NUMBER | STAR);
 tbd:                KW_TBD STRING?;
 tbdCode:            KW_TBD_CODE STRING?;
