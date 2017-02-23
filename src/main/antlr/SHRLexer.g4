@@ -79,7 +79,7 @@ URL:                [a-z]+ '://' [a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
 PATH_URL:           [A-Z][A-Z0-9]* '/' [0-9a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
 URN_OID:            'urn:oid:' [0-2]'.'[0-9]+('.'[0-9]+)*;
 URN:                'urn' (':'[0-9a-zA-Z\\.]+)+;
-CODE:               '#' [0-9a-zA-z\\-]+;
+CODE:               '#' ~[, \r\t\n]+;
 WHOLE_NUMBER:       [0-9]+;
 ALL_CAPS:           [A-Z][A-Z0-9_]*;
 UPPER_WORD:         [A-Z][0-9a-zA-Z\\-_]*;
