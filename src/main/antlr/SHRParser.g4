@@ -70,17 +70,15 @@ mappingsHeader:     KW_GRAMMAR KW_G_MAP version KW_NAMESPACE  namespace;
 targetStatement:    KW_TARGET simpleName;
 
 mappingDefs:        mappingDef*;
-mappingDef:         mappingDefHeader fieldMapping*;
-mappingDefHeader:   simpleName (KW_MAPS_TO simpleName)? COLON;
+mappingDef:         mappingDefHeader mappingRule*;
+mappingDefHeader:   simpleName (KW_MAPS_TO TARGET_PHRASE)? COLON;
 
-fieldMapping:       fieldToFieldMapping | urlMapping | cardMapping;
-fieldToFieldMapping:source KW_MAPS_TO target;
-source:             sourcePart (DOT sourcePart)* (OPEN_BRACKET source CLOSE_BRACKET)?;
-sourcePart:         simpleOrFQName | primitive | tbd;
-target:             targetPart (DOT targetPart)* (OPEN_BRACKET target CLOSE_BRACKET)?;
-targetPart:         LOWER_WORD | DOT_SEPARATED_LW /*yuck*/ | UPPER_WORD | ALL_CAPS | primitive;
-urlMapping:         source KW_MAPS_TO URL;
-cardMapping:        targetPart KW_IS count;
+mappingRule:        fieldMapping | cardMapping;
+fieldMapping:       source KW_MAPS_TO TARGET_PHRASE;
+source:             sourcePart (DOT sourcePart)*;
+sourcePart:         sourceWord (OPEN_BRACKET sourceWord CLOSE_BRACKET)*;
+sourceWord:         simpleOrFQName | primitive | tbd;
+cardMapping:        KW_CONSTRAIN TARGET_PHRASE KW_TO count;
 
 // CONTENT PROFILES: TODO -- May Be a Separate Grammar
 
@@ -95,7 +93,7 @@ ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
 code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
-codeFromVS:         (KW_CODE_FROM | KW_CODING_FROM) valueset;
+codeFromVS:         (KW_CODE_FROM | KW_CODING_FROM | KW_CODEABLECONCEPT_FROM) valueset;
 
 //elementWithConstraint
 
@@ -111,7 +109,7 @@ elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
                     | KW_DATE_TIME | KW_TIME | KW_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
-                    | KW_POSITIVE_INT;
+                    | KW_POSITIVE_INT | KW_XHTML;
 count:              WHOLE_NUMBER RANGE (WHOLE_NUMBER | STAR);
 tbd:                KW_TBD STRING?;
 tbdCode:            KW_TBD_CODE STRING?;
