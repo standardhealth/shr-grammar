@@ -78,7 +78,7 @@ fieldMapping:       source KW_MAPS_TO TARGET_PHRASE;
 source:             sourcePart (DOT sourcePart)*;
 sourcePart:         sourceWord (OPEN_BRACKET sourceWord CLOSE_BRACKET)*;
 sourceWord:         simpleOrFQName | primitive | tbd;
-cardMapping:        KW_CONSTRAIN TARGET_PHRASE KW_TO count;
+cardMapping:        KW_CONSTRAIN TARGET_WORD KW_TO count;
 
 // CONTENT PROFILES: TODO -- May Be a Separate Grammar
 
