@@ -55,10 +55,11 @@ valuesetDefs:           valuesetDef*;
 valuesetDef:            valuesetHeader valuesetProps? valuesetValues?;
 valuesetHeader:         KW_VALUESET (URL | URN_OID| simpleName);
 valuesetValues:         valuesetValue+;
-valuesetValue:          fullyQualifiedCode | valuesetInlineValue | valuesetDescendingFrom | valuesetFrom;
+valuesetValue:          fullyQualifiedCode | valuesetInlineValue | valuesetDescendingFrom | valuesetFromCode | valuesetFromCodeSystem;
 valuesetInlineValue:    CODE STRING?;
 valuesetDescendingFrom: KW_INCLUDES_CODES_DESCENDING_FROM fullyQualifiedCode (KW_AND_NOT_DESCENDING_FROM fullyQualifiedCode)*;
-valuesetFrom:           KW_INCLUDES_CODES_FROM fullyQualifiedCode;
+valuesetFromCodeSystem: KW_INCLUDES_CODES_FROM ALL_CAPS;
+valuesetFromCode:       KW_INCLUDES_CODES_FROM fullyQualifiedCode;
 
 valuesetProps:      valuesetProp+;
 valuesetProp:       conceptProp | descriptionProp;
