@@ -55,10 +55,11 @@ valuesetDefs:           valuesetDef*;
 valuesetDef:            valuesetHeader valuesetProps? valuesetValues?;
 valuesetHeader:         KW_VALUESET (URL | URN_OID| simpleName);
 valuesetValues:         valuesetValue+;
-valuesetValue:          fullyQualifiedCode | valuesetInlineValue | valuesetDescendingFrom | valuesetFrom;
+valuesetValue:          fullyQualifiedCode | valuesetInlineValue | valuesetDescendingFrom | valuesetFromCode | valuesetFromCodeSystem;
 valuesetInlineValue:    CODE STRING?;
 valuesetDescendingFrom: KW_INCLUDES_CODES_DESCENDING_FROM fullyQualifiedCode (KW_AND_NOT_DESCENDING_FROM fullyQualifiedCode)*;
-valuesetFrom:           KW_INCLUDES_CODES_FROM fullyQualifiedCode;
+valuesetFromCodeSystem: KW_INCLUDES_CODES_FROM ALL_CAPS;
+valuesetFromCode:       KW_INCLUDES_CODES_FROM fullyQualifiedCode;
 
 valuesetProps:      valuesetProp+;
 valuesetProp:       conceptProp | descriptionProp;
@@ -78,7 +79,7 @@ fieldMapping:       source KW_MAPS_TO TARGET_PHRASE;
 source:             sourcePart (DOT sourcePart)*;
 sourcePart:         sourceWord (OPEN_BRACKET sourceWord CLOSE_BRACKET)*;
 sourceWord:         simpleOrFQName | primitive | tbd;
-cardMapping:        KW_CONSTRAIN TARGET_PHRASE KW_TO count;
+cardMapping:        KW_CONSTRAIN TARGET_WORD KW_TO count;
 
 // CONTENT PROFILES: TODO -- May Be a Separate Grammar
 
