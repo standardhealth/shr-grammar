@@ -1,8 +1,6 @@
 package org.mitre.shr.antlr;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,12 +20,21 @@ public class ParseTreeTool {
             is = new FileInputStream(inputFile);
         }
         ANTLRInputStream input = new ANTLRInputStream(is);
-        org.mitre.shr.antlr.SHRLexer lexer = new org.mitre.shr.antlr.SHRLexer(input);
+        Lexer lexer = ParseTool.getLexer(inputFile, input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         tokens.fill();
-        SHRParser parser = new SHRParser(tokens);
+        Parser parser = ParseTool.getParser(inputFile, tokens);
         parser.setBuildParseTree(true);
-        ParserRuleContext tree = parser.shr();
+        ParserRuleContext tree;
+        if (parser instanceof SHRDataElementParser) {
+            tree = ((SHRDataElementParser) parser).doc();
+        } else if (parser instanceof SHRValueSetParser) {
+            tree = ((SHRValueSetParser) parser).doc();
+        } else if (parser instanceof SHRMapParser) {
+            tree = ((SHRMapParser) parser).doc();
+        } else {
+            throw new RuntimeException("Unrecognized Parser");
+        }
         tree.inspect(parser);
     }
 }

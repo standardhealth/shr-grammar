@@ -1,18 +1,15 @@
-parser grammar SHRParser;
+parser grammar SHRDataElementParser;
 
-options { tokenVocab=SHRLexer; }
-
-shr:                dataDefsDoc | valuesetDefsDoc | mappingsDoc /* | contentProfiles*/;
+options { tokenVocab=SHRDataElementLexer; }
 
 // DATA DEFINITIONS (Grammar: DataElement)
 
-dataDefsDoc:        dataDefsHeader descriptionProp? usesStatement? pathDefs? vocabularyDefs? dataDefs;
-dataDefsHeader:     KW_GRAMMAR KW_G_DATA_ELEMENT version KW_NAMESPACE namespace;
+doc:                docHeader descriptionProp? usesStatement? pathDefs? vocabularyDefs? dataDefs;
+docHeader:          KW_GRAMMAR KW_G_DATA_ELEMENT version KW_NAMESPACE namespace;
 
 usesStatement:      KW_USES namespace (COMMA namespace)*;
 
-pathDefs:           (defaultPathDef pathDef*) | (defaultPathDef? pathDef+);
-defaultPathDef:     KW_PATH URL;
+pathDefs:           pathDef+;
 pathDef:            KW_PATH ALL_CAPS EQUAL URL;
 
 vocabularyDefs:     vocabularyDef+;
@@ -32,56 +29,16 @@ elementProp:        basedOnProp | conceptProp | descriptionProp;
 
 values:             value? field*;
 
-value:              KW_VALUE (uncountedValue | countedValue);
-uncountedValue:     (valueType (KW_OR valueType)*) | (OPEN_PAREN valueType (KW_OR valueType)* CLOSE_PAREN);
-countedValue:       count valueType | count OPEN_PAREN valueType (KW_OR valueType)* CLOSE_PAREN;
+value:              KW_VALUE count? OPEN_PAREN? valueType (KW_OR valueType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
 valueType:          simpleOrFQName | ref | primitive | codeFromVS | elementWithConstraint | tbd;
 
-field:              countedField (KW_OR countedField)*;
-countedField:       count? (fieldType | OPEN_PAREN fieldType (KW_OR fieldType)* CLOSE_PAREN);
+field:              count? OPEN_PAREN? fieldType (KW_OR fieldType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
 fieldType:          simpleOrFQName | ref | elementWithConstraint | tbd;
 
 basedOnProp:        KW_BASED_ON (simpleOrFQName | tbd);
-conceptProp:        KW_CONCEPT (tbd | concepts);
+conceptProp:        KW_CONCEPT (concepts | tbd);
 concepts:           fullyQualifiedCode (COMMA fullyQualifiedCode)*;
 descriptionProp:    KW_DESCRIPTION STRING;
-
-// VALUESET DEFINITIONS (Grammar: ValueSet)
-
-valuesetDefsDoc:    valuesetDefsHeader usesStatement? pathDefs? vocabularyDefs? valuesetDefs;
-valuesetDefsHeader: KW_GRAMMAR KW_G_VALUE_SET version KW_NAMESPACE  namespace;
-
-valuesetDefs:           valuesetDef*;
-valuesetDef:            valuesetHeader valuesetProps? valuesetValues?;
-valuesetHeader:         KW_VALUESET (URL | URN_OID| simpleName);
-valuesetValues:         valuesetValue+;
-valuesetValue:          fullyQualifiedCode | valuesetInlineValue | valuesetDescendingFrom | valuesetFromCode | valuesetFromCodeSystem;
-valuesetInlineValue:    CODE STRING?;
-valuesetDescendingFrom: KW_INCLUDES_CODES_DESCENDING_FROM fullyQualifiedCode (KW_AND_NOT_DESCENDING_FROM fullyQualifiedCode)*;
-valuesetFromCodeSystem: KW_INCLUDES_CODES_FROM ALL_CAPS;
-valuesetFromCode:       KW_INCLUDES_CODES_FROM fullyQualifiedCode;
-
-valuesetProps:      valuesetProp+;
-valuesetProp:       conceptProp | descriptionProp;
-
-// MAPPINGS (Grammar: Map)
-
-mappingsDoc:        mappingsHeader targetStatement mappingDefs;
-mappingsHeader:     KW_GRAMMAR KW_G_MAP version KW_NAMESPACE  namespace;
-targetStatement:    KW_TARGET simpleName;
-
-mappingDefs:        mappingDef*;
-mappingDef:         mappingDefHeader mappingRule*;
-mappingDefHeader:   simpleName (KW_MAPS_TO TARGET_PHRASE)? COLON;
-
-mappingRule:        fieldMapping | cardMapping;
-fieldMapping:       source KW_MAPS_TO TARGET_PHRASE;
-source:             sourcePart (DOT sourcePart)*;
-sourcePart:         sourceWord (OPEN_BRACKET sourceWord CLOSE_BRACKET)*;
-sourceWord:         simpleOrFQName | primitive | tbd;
-cardMapping:        KW_CONSTRAIN TARGET_WORD KW_TO count;
-
-// CONTENT PROFILES: TODO -- May Be a Separate Grammar
 
 // COMMON BITS
 

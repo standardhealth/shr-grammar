@@ -1,35 +1,10 @@
-lexer grammar SHRLexer;
+lexer grammar SHRMapLexer;
 
 // KEYWORDS for SHR
 KW_GRAMMAR:         'Grammar:';
-KW_G_DATA_ELEMENT:  'DataElement';
-KW_G_VALUE_SET:     'ValueSet';
 KW_G_MAP:           'Map';
 KW_NAMESPACE:       'Namespace:';
-KW_USES:            'Uses:';
-KW_PATH:            'Path:';
-KW_VOCABULARY:      'CodeSystem:'; // Don't rename token for now (it will cause merge conflicts w/ other work)
-KW_ELEMENT:         'Element:';
-KW_ENTRY_ELEMENT:   'EntryElement:';
-KW_BASED_ON:        'Based on:';
-KW_VALUE:           'Value:';
-KW_VALUESET:        'ValueSet:';
-KW_INCLUDES_CODES_FROM: 'Includes codes from';
-KW_INCLUDES_CODES_DESCENDING_FROM: 'Includes codes descending from';
-KW_AND_NOT_DESCENDING_FROM: 'and not descending from';
-KW_CONCEPT:         'Concept:';
-KW_DESCRIPTION:     'Description:';
-KW_REF:             'ref';
-KW_OR:              'or';
-KW_WITH:            'with';
-KW_IS:              'is';
-KW_IS_TYPE:         'is type';
-KW_VALUE_IS_TYPE:   'value is type';
-KW_INCLUDES:        'includes';
-KW_TRUE:            'true';
-KW_FALSE:           'false';
 KW_TBD:             'TBD';
-KW_TBD_CODE:        'TBD#TBD';
 
 // KEYWORDS for FHIR Primitives
 KW_BOOLEAN:         'boolean';
@@ -50,12 +25,6 @@ KW_UNSIGNED_INT:    'unsignedInt';
 KW_POSITIVE_INT:    'positiveInt';
 KW_XHTML:           'xhtml';
 
-// KEYWORDS for types w/ qualifiers
-KW_CODE_FROM:       'code from';
-KW_CODING_FROM:     'Coding from';
-KW_CODEABLECONCEPT_FROM: 'CodeableConcept from';
-KW_UNITS:           'units';
-
 // KEYWORDS for mapping
 KW_TARGET:          'Target:';
 KW_MAPS_TO:         'maps to' -> pushMode(MAPPING_TARGET);
@@ -64,22 +33,13 @@ KW_TO:              'to';
 
 // SYMBOLS
 DOT:                '.';
-EQUAL:              '=';
-COMMA:              ',';
 STAR:               '*';
-OPEN_PAREN:         '(';
-CLOSE_PAREN:        ')';
 OPEN_BRACKET:       '[';
 CLOSE_BRACKET:      ']';
 COLON:              ':';
 RANGE:              '..';
 
 // PATTERNS
-URL:                [a-z]+ '://' [a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
-PATH_URL:           [A-Z][A-Z0-9]* '/' [0-9a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
-URN_OID:            'urn:oid:' [0-2]'.'[0-9]+('.'[0-9]+)*;
-URN:                'urn' (':'[0-9a-zA-Z\\.]+)+;
-CODE:               '#' ~[, \r\t\n]+;
 WHOLE_NUMBER:       [0-9]+;
 ALL_CAPS:           [A-Z][A-Z0-9_]*;
 UPPER_WORD:         [A-Z][0-9a-zA-Z\\-_]*;
