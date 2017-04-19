@@ -1,6 +1,8 @@
 lexer grammar SHRValueSetLexer;
 
-// KEYWORDS for SHR
+import PatternsLexer, IgnoredTokensLexer;
+
+// KEYWORDS for SHR ValueSets
 KW_GRAMMAR:         'Grammar:';
 KW_G_VALUE_SET:     'ValueSet';
 KW_NAMESPACE:       'Namespace:';
@@ -24,15 +26,3 @@ URL:                [a-z]+ '://' [a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
 URN_OID:            'urn:oid:' [0-2]'.'[0-9]+('.'[0-9]+)*;
 URN:                'urn' (':'[0-9a-zA-Z\\.]+)+;
 CODE:               '#' ~[, \r\t\n]+;
-WHOLE_NUMBER:       [0-9]+;
-ALL_CAPS:           [A-Z][A-Z0-9_]*;
-UPPER_WORD:         [A-Z][0-9a-zA-Z\\-_]*;
-LOWER_WORD:         [a-z][0-9a-zA-Z\\-]*;
-DOT_SEPARATED_LW:   [a-z][0-9a-zA-Z\\-]* ('.' [a-z][0-9a-zA-z\\-]*)+;
-STRING:             '"' (~[\\"])* '"';
-
-// THINGS WE GENERALLY IGNORE
-WS:                 [ \r\t] -> channel(HIDDEN);
-NEWLINE:            '\n' -> channel(HIDDEN);
-COMMENT:            '/*' .*? '*/' -> skip;
-LINE_COMMENT:       '//' ~[\r\n]* -> skip;
