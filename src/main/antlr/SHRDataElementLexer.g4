@@ -18,6 +18,8 @@ KW_DESCRIPTION:     'Description:';
 KW_REF:             'ref';
 KW_OR:              'or';
 KW_WITH:            'with';
+KW_FROM:            'from';
+KW_UNITS:           'units';
 KW_IS:              'is';
 KW_IS_TYPE:         'is type';
 KW_VALUE_IS_TYPE:   'value is type';
@@ -26,12 +28,6 @@ KW_TRUE:            'true';
 KW_FALSE:           'false';
 KW_TBD:             'TBD';
 KW_TBD_CODE:        'TBD#TBD';
-
-// KEYWORDS for types w/ qualifiers
-KW_CODE_FROM:       'code from';
-KW_CODING_FROM:     'Coding from';
-KW_CODEABLECONCEPT_FROM: 'CodeableConcept from';
-KW_UNITS:           'units';
 
 // SYMBOLS
 DOT:                '.';

@@ -51,7 +51,7 @@ ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
 code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
-codeFromVS:         (KW_CODE_FROM | KW_CODING_FROM | KW_CODEABLECONCEPT_FROM) valueset;
+codeFromVS:         (KW_CODE | simpleOrFQName) KW_FROM valueset;
 
 //elementWithConstraint
 
