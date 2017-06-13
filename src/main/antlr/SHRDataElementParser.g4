@@ -51,7 +51,8 @@ ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
 code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
-codeFromVS:         (KW_CODE | simpleOrFQName) KW_FROM valueset;
+codeFromVS:         (KW_CODE | simpleOrFQName) bindingInfix? KW_FROM valueset KW_IF_COVERED?;
+bindingInfix:       KW_MUST_BE | KW_SHOULD_BE | KW_COULD_BE;
 
 //elementWithConstraint
 
