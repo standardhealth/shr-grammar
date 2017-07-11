@@ -1,0 +1,17 @@
+#!/bin/bash
+
+shopt -s expand_aliases
+source ~/.bash_profile
+source ~/.bashrc
+
+cd ./src/main/antlr
+
+antlr4 -Dlanguage=JavaScript SHRDataElementLexer.g4
+antlr4 -Dlanguage=JavaScript -visitor SHRDataElementParser.g4
+
+mv -i SHRDataElementLexer.js            ../../../../shr-text-import/lib/parsers
+cp -i SHRDataElementLexer.tokens        ../../../../shr-text-import/lib/parsers
+mv -i SHRDataElementParser.js           ../../../../shr-text-import/lib/parsers
+mv -i SHRDataElementParser.tokens       ../../../../shr-text-import/lib/parsers
+mv -i SHRDataElementParserListener.js   ../../../../shr-text-import/lib/parsers
+mv -i SHRDataElementParserVisitor.js    ../../../../shr-text-import/lib/parsers
