@@ -13,13 +13,13 @@ pathDefs:           pathDef+;
 pathDef:            KW_PATH ALL_CAPS EQUAL URL;
 
 vocabularyDefs:     vocabularyDef+;
-vocabularyDef:      KW_VOCABULARY ALL_CAPS EQUAL (URL | URN_OID | URN);
+vocabularyDef:      KW_VOCABULARY ALL_CAPS EQUAL (URL | URN_OID | URN); // (KW_VOCAB_VERSION WHOLE_NUMBER DOT WHOLE_NUMBER)?;
 
 dataDefs:           dataDef*;
 dataDef:            elementDef | entryDef;
 
 elementDef:         elementHeader elementProps? values;
-elementHeader:      KW_ELEMENT simpleName;
+elementHeader:      KW_ABSTRACT? KW_ELEMENT simpleName;
 
 entryDef:           entryHeader elementProps? values;
 entryHeader:        KW_ENTRY_ELEMENT simpleName;

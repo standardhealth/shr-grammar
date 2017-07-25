@@ -9,6 +9,8 @@ KW_NAMESPACE:       'Namespace:';
 KW_USES:            'Uses:';
 KW_PATH:            'Path:';
 KW_VOCABULARY:      'CodeSystem:';
+//KW_VOCAB_VERSION:   'Version:';
+KW_ABSTRACT:        'Abstract';
 KW_ELEMENT:         'Element:';
 KW_ENTRY_ELEMENT:   'EntryElement:';
 KW_BASED_ON:        'Based on:';
