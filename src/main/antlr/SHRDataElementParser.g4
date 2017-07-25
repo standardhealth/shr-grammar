@@ -22,7 +22,7 @@ elementDef:         elementHeader elementProps? values;
 elementHeader:      KW_ABSTRACT? KW_ELEMENT simpleName;
 
 entryDef:           entryHeader elementProps? values;
-entryHeader:        KW_ABSTRACT? KW_ENTRY_ELEMENT simpleName;
+entryHeader:        KW_ENTRY_ELEMENT simpleName;
 
 elementProps:       elementProp+;
 elementProp:        basedOnProp | conceptProp | descriptionProp;
