@@ -22,7 +22,7 @@ elementDef:         elementHeader elementProps? values;
 elementHeader:      KW_ABSTRACT? KW_ELEMENT simpleName;
 
 entryDef:           entryHeader elementProps? values;
-entryHeader:        KW_ABSTRACT? KW_ENTRY_ELEMENT simpleName;
+entryHeader:        KW_ENTRY_ELEMENT simpleName;
 
 elementProps:       elementProp+;
 elementProp:        basedOnProp | conceptProp | descriptionProp;
@@ -30,7 +30,7 @@ elementProp:        basedOnProp | conceptProp | descriptionProp;
 values:             value? field*;
 
 value:              KW_VALUE count? OPEN_PAREN? valueType (KW_OR valueType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
-valueType:          simpleOrFQName | ref | primitive | codeFromVS | elementWithConstraint | tbd;
+valueType:          simpleOrFQName | ref | primitive | elementWithConstraint | tbd;
 
 field:              count? OPEN_PAREN? fieldType (KW_OR fieldType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
 fieldType:          simpleOrFQName | ref | elementWithConstraint | tbd;
@@ -51,7 +51,6 @@ ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
 code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
-codeFromVS:         (KW_CODE | simpleOrFQName) bindingInfix? KW_FROM valueset KW_IF_COVERED?;
 bindingInfix:       KW_MUST_BE | KW_SHOULD_BE | KW_COULD_BE;
 typeConstraint:     count (simpleOrFQName | tbd);
 
@@ -60,7 +59,8 @@ typeConstraint:     count (simpleOrFQName | tbd);
 elementWithConstraint:      (simpleOrFQName | elementPath | primitive) elementConstraint?;
 elementPath:                simpleOrFQName (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
 elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementWithUnitsConstraint;
-elementCodeVSConstraint:    KW_WITH codeFromVS;
+legacyWithCode:             KW_WITH (KW_CODE | simpleOrFQName); // Just here for backwards compatibility until definitions are updated
+elementCodeVSConstraint:    legacyWithCode? bindingInfix? KW_FROM valueset KW_IF_COVERED?;
 elementCodeValueConstraint: KW_IS codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
 elementBooleanConstraint:   KW_IS (KW_TRUE | KW_FALSE);
