@@ -52,7 +52,7 @@ code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
 bindingInfix:       KW_MUST_BE | KW_SHOULD_BE | KW_COULD_BE;
-typeConstraint:     count (simpleOrFQName | tbd);
+typeConstraint:     count (simpleOrFQName | ref | tbd);
 
 //elementWithConstraint
 
@@ -64,7 +64,7 @@ elementCodeVSConstraint:    legacyWithCode? bindingInfix? KW_FROM valueset KW_IF
 elementCodeValueConstraint: KW_IS codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
 elementBooleanConstraint:   KW_IS (KW_TRUE | KW_FALSE);
-elementTypeConstraint:      (KW_IS_TYPE | KW_VALUE_IS_TYPE) (simpleOrFQName | tbd);
+elementTypeConstraint:      (KW_IS_TYPE | KW_VALUE_IS_TYPE) (simpleOrFQName | ref | tbd);
 elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
 elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
