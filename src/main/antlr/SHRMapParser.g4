@@ -12,12 +12,13 @@ mappingDefs:        mappingDef*;
 mappingDef:         mappingDefHeader mappingRule*;
 mappingDefHeader:   simpleName (KW_MAPS_TO TARGET_PHRASE)? COLON;
 
-mappingRule:        fieldMapping | cardMapping;
+mappingRule:        fieldMapping | cardMapping | fixedMapping;
 fieldMapping:       source KW_MAPS_TO TARGET_PHRASE;
 source:             sourcePart (DOT sourcePart)*;
 sourcePart:         sourceWord (OPEN_BRACKET sourceWord CLOSE_BRACKET)*;
 sourceWord:         simpleOrFQName | primitive | tbd;
 cardMapping:        KW_CONSTRAIN TARGET_WORD KW_TO count;
+fixedMapping:       KW_FIX TARGET_WORD_2 TARGET_PHRASE_2;
 
 // COMMON BITS
 
