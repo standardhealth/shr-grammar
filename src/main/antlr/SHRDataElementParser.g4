@@ -44,7 +44,7 @@ descriptionProp:    KW_DESCRIPTION STRING;
 
 version:            WHOLE_NUMBER DOT WHOLE_NUMBER;
 namespace:          LOWER_WORD | DOT_SEPARATED_LW;
-simpleName:         UPPER_WORD | ALL_CAPS;
+simpleName:         UPPER_WORD | ALL_CAPS | LOWER_WORD; //LOWER_WORD is not intended use, and will throw an error. However, this prevents compiler crash.
 fullyQualifiedName: DOT_SEPARATED_UW;
 simpleOrFQName:     simpleName | fullyQualifiedName;
 ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
