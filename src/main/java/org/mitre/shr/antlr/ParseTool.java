@@ -1,8 +1,6 @@
 package org.mitre.shr.antlr;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.stream.Stream;
 
 /**
 * A simple wrapper around the ANTLR4 parser that will print parse errors to the console.
@@ -57,14 +54,41 @@ public class ParseTool {
         try {
             InputStream is = Files.newInputStream(path, StandardOpenOption.READ);
             ANTLRInputStream input = new ANTLRInputStream(is);
-            SHRLexer lexer = new SHRLexer(input);
+            Lexer lexer = getLexer(path.toString(), input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             tokens.fill();
-            SHRParser parser = new SHRParser(tokens);
+            Parser parser = getParser(path.toString(), tokens);
             parser.setBuildParseTree(true);
-            parser.shr();
+            if (parser instanceof SHRDataElementParser) {
+                ((SHRDataElementParser) parser).doc();
+            } else if (parser instanceof SHRValueSetParser) {
+                ((SHRValueSetParser) parser).doc();
+            } else if (parser instanceof SHRMapParser) {
+                ((SHRMapParser) parser).doc();
+            } else {
+                throw new RuntimeException("Unrecognized Parser");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static Lexer getLexer(String path, ANTLRInputStream input) {
+        if (path.endsWith("_vs.txt")) {
+            return new SHRValueSetLexer(input);
+        } else if (path.endsWith("_map.txt")) {
+            return new SHRMapLexer(input);
+        }
+        return new SHRDataElementLexer(input);
+    }
+
+    public static Parser getParser(String path, CommonTokenStream tokens) {
+        if (path.endsWith("_vs.txt")) {
+            return new SHRValueSetParser(tokens);
+        } else if (path.endsWith("_map.txt")) {
+            return new SHRMapParser(tokens);
+        }
+        return new SHRDataElementParser(tokens);
     }
 }
