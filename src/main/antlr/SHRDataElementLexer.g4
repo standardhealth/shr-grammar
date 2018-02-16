@@ -35,6 +35,10 @@ KW_FALSE:           'false';
 KW_TBD:             'TBD';
 KW_TBD_CODE:        'TBD#TBD';
 
+// KEYWORDS for special constrainable items
+KW_BAR_ENTRY:       '_Entry';
+KW_BAR_VALUE:       '_Value';
+
 // SYMBOLS
 DOT:                '.';
 EQUAL:              '=';

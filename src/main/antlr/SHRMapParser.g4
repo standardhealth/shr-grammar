@@ -16,7 +16,7 @@ mappingRule:        fieldMapping | cardMapping | fixedMapping;
 fieldMapping:       source KW_MAPS_TO TARGET_PHRASE;
 source:             sourcePart (DOT sourcePart)*;
 sourcePart:         sourceWord (OPEN_BRACKET sourceWord CLOSE_BRACKET)*;
-sourceWord:         simpleOrFQName | primitive | tbd;
+sourceWord:         specialWord | simpleOrFQName | primitive | tbd;
 cardMapping:        KW_CONSTRAIN TARGET_WORD KW_TO count;
 fixedMapping:       KW_FIX TARGET_WORD_2 TARGET_PHRASE_2;
 
@@ -24,6 +24,7 @@ fixedMapping:       KW_FIX TARGET_WORD_2 TARGET_PHRASE_2;
 
 version:            WHOLE_NUMBER DOT WHOLE_NUMBER;
 namespace:          LOWER_WORD | DOT_SEPARATED_LW;
+specialWord:        KW_BAR_CONCEPT | KW_BAR_ENTRY | KW_BAR_VALUE ;
 simpleName:         UPPER_WORD | ALL_CAPS;
 fullyQualifiedName: DOT_SEPARATED_UW;
 simpleOrFQName:     simpleName | fullyQualifiedName;

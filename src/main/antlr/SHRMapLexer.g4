@@ -15,6 +15,11 @@ KW_CONSTRAIN:       'constrain' -> pushMode(CARDINALITY_MAPPING_TARGET);
 KW_FIX:             'fix' -> pushMode(FIXED_MAPPING_TARGET);
 KW_TO:              'to';
 
+// KEYWORDS for special mappable items
+KW_BAR_CONCEPT:     '_Concept';
+KW_BAR_ENTRY:       '_Entry';
+KW_BAR_VALUE:       '_Value';
+
 // SYMBOLS
 DOT:                '.';
 STAR:               '*';
