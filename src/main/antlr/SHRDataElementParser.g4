@@ -33,7 +33,7 @@ value:              KW_VALUE count? OPEN_PAREN? valueType (KW_OR valueType)* CLO
 valueType:          simpleOrFQName | ref | primitive | elementWithConstraint | tbd;
 
 field:              count? OPEN_PAREN? fieldType (KW_OR fieldType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
-fieldType:          simpleOrFQName | ref | elementWithConstraint | tbd;
+fieldType:          specialWord | simpleOrFQName | ref | elementWithConstraint | tbd;
 
 basedOnProp:        KW_BASED_ON (simpleOrFQName | tbd);
 conceptProp:        KW_CONCEPT (concepts | tbd);
@@ -44,6 +44,7 @@ descriptionProp:    KW_DESCRIPTION STRING;
 
 version:            WHOLE_NUMBER DOT WHOLE_NUMBER;
 namespace:          LOWER_WORD | DOT_SEPARATED_LW;
+specialWord:        KW_BAR_ENTRY | KW_BAR_VALUE ;
 simpleName:         UPPER_WORD | ALL_CAPS | LOWER_WORD; //LOWER_WORD is not intended use, and will throw an error. However, this prevents compiler crash.
 fullyQualifiedName: DOT_SEPARATED_UW;
 simpleOrFQName:     simpleName | fullyQualifiedName;
@@ -56,8 +57,10 @@ typeConstraint:     count (simpleOrFQName | ref | primitive | tbd);
 
 //elementWithConstraint
 
-elementWithConstraint:      (simpleOrFQName | elementPath | primitive) elementConstraint?;
-elementPath:                simpleOrFQName (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
+elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | primitive) elementConstraint?;
+// NOTE: not supporting _Value in subpath for now because that requires more significant work to support it in
+// the importer, models, and other tooling.
+elementPath:                (specialWord | simpleOrFQName) (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
 elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementWithUnitsConstraint;
 legacyWithCode:             KW_WITH (KW_CODE | simpleOrFQName); // Just here for backwards compatibility until definitions are updated
 elementCodeVSConstraint:    legacyWithCode? bindingInfix? KW_FROM valueset KW_IF_COVERED?;
