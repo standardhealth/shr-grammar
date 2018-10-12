@@ -22,23 +22,24 @@ elementDef:         elementHeader elementProps? values;
 elementHeader:      KW_ABSTRACT? KW_ELEMENT simpleName;
 
 entryDef:           entryHeader elementProps? values;
-entryHeader:        KW_ENTRY_ELEMENT simpleName;
+entryHeader:        KW_ENTRY simpleName;
 
 elementProps:       elementProp+;
-elementProp:        basedOnProp | conceptProp | descriptionProp;
+elementProp:        parentProp | conceptProp | descriptionProp;
 
 values:             value? field*;
 
-value:              KW_VALUE count? OPEN_PAREN? valueType (KW_OR valueType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
+value:              KW_VALUE OPEN_PAREN? valueType (KW_OR valueType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
 valueType:          simpleOrFQName | ref | primitive | elementWithConstraint | tbd;
 
-field:              count? OPEN_PAREN? fieldType (KW_OR fieldType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
+field:              OPEN_PAREN? fieldType (KW_OR fieldType)* CLOSE_PAREN? count? ; // TODO: Remove PAREN (here for backwards compatibility now)
 fieldType:          specialWord | simpleOrFQName | ref | elementWithConstraint | tbd;
 
-basedOnProp:        KW_BASED_ON (simpleOrFQName | tbd);
+parentProp:         KW_PARENT (simpleOrFQName | tbd);
 conceptProp:        KW_CONCEPT (concepts | tbd);
 concepts:           fullyQualifiedCode (COMMA fullyQualifiedCode)*;
 descriptionProp:    KW_DESCRIPTION STRING;
+propertyProp:       KW_PROPERTY field
 
 // COMMON BITS
 
@@ -48,12 +49,12 @@ specialWord:        KW_BAR_ENTRY | KW_BAR_VALUE ;
 simpleName:         UPPER_WORD | ALL_CAPS | LOWER_WORD; //LOWER_WORD is not intended use, and will throw an error. However, this prevents compiler crash.
 fullyQualifiedName: DOT_SEPARATED_UW;
 simpleOrFQName:     simpleName | fullyQualifiedName;
-ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
+ref:                simpleOrFQName;
 code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
-bindingInfix:       KW_MUST_BE | KW_SHOULD_BE | KW_COULD_BE;
-typeConstraint:     count (simpleOrFQName | ref | primitive | tbd);
+bindingInfix:       KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE
+typeConstraint:     (simpleOrFQName | ref | primitive | tbd) count;
 
 //elementWithConstraint
 
@@ -62,8 +63,8 @@ elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | primit
 // the importer, models, and other tooling.
 elementPath:                (specialWord | simpleOrFQName) (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
 elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementWithUnitsConstraint;
-legacyWithCode:             KW_WITH (KW_CODE | simpleOrFQName); // Just here for backwards compatibility until definitions are updated
-elementCodeVSConstraint:    legacyWithCode? bindingInfix? KW_FROM valueset KW_IF_COVERED?;
+legacyWithCode:             KW_WITH (KW_CONCEPT_CODE | simpleOrFQName); // Just here for backwards compatibility until definitions are updated
+elementCodeVSConstraint:    legacyWithCode? KW_FROM valueset OPEN_PAREN bindingInfix? CLOSE_PAREN KW_IF_COVERED?;
 elementCodeValueConstraint: KW_IS codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
 elementBooleanConstraint:   KW_IS (KW_TRUE | KW_FALSE);
@@ -72,7 +73,7 @@ elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
 elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
-                    | KW_DATE_TIME | KW_TIME | KW_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
+                    | KW_DATE_TIME | KW_TIME | KW_CONCEPT_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
                     | KW_POSITIVE_INT | KW_XHTML;
 count:              WHOLE_NUMBER RANGE (WHOLE_NUMBER | STAR);
 tbd:                KW_TBD STRING?;
