@@ -19,27 +19,35 @@ dataDefs:           dataDef*;
 dataDef:            elementDef | entryDef;
 
 elementDef:         elementHeader elementProps? values;
-elementHeader:      KW_ABSTRACT? KW_ELEMENT simpleName;
+elementHeader:      KW_ELEMENT simpleName;
 
 entryDef:           entryHeader elementProps? values;
 entryHeader:        KW_ENTRY simpleName;
+
+abstractDef:        abstractHeader elementProps? values;
+abstractHeader:     KW_ABSTRACT simpleName;
 
 elementProps:       elementProp+;
 elementProp:        parentProp | conceptProp | descriptionProp;
 
 values:             value? field*;
 
-value:              KW_VALUE OPEN_PAREN? valueType (KW_OR valueType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
+value:              KW_VALUE valueType (KW_OR valueType)*;
 valueType:          simpleOrFQName | ref | primitive | elementWithConstraint | tbd;
 
-field:              OPEN_PAREN? fieldType (KW_OR fieldType)* CLOSE_PAREN? count? ; // TODO: Remove PAREN (here for backwards compatibility now)
-fieldType:          specialWord | simpleOrFQName | ref | elementWithConstraint | tbd;
+field:              propertyField | constraintField;
+fieldType:          propertyFieldType | constraintFieldType;
+
+propertyField:              KW_PROPERTY? fieldType (KW_OR fieldType)* count?;
+propertyFieldType:          specialWord | simpleOrFQName | tbd;
+
+constraintField:              fieldType (KW_OR fieldType)* count?;
+constraintFieldType:          specialWord | simpleOrFQName | ref | elementWithConstraint | tbd;
 
 parentProp:         KW_PARENT (simpleOrFQName | tbd);
 conceptProp:        KW_CONCEPT (concepts | tbd);
 concepts:           fullyQualifiedCode (COMMA fullyQualifiedCode)*;
 descriptionProp:    KW_DESCRIPTION STRING;
-propertyProp:       KW_PROPERTY field
 
 // COMMON BITS
 
@@ -53,7 +61,7 @@ ref:                simpleOrFQName;
 code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
-bindingInfix:       KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE
+bindingInfix:       KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE;
 typeConstraint:     (simpleOrFQName | ref | primitive | tbd) count;
 
 //elementWithConstraint

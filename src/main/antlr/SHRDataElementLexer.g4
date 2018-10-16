@@ -17,7 +17,7 @@ KW_PARENT:          'Parent:';
 KW_VALUE:           'Value:';
 KW_CONCEPT:         'Concept:';
 KW_DESCRIPTION:     'Description:';
-KW_PROPERTY:        'Property:'
+KW_PROPERTY:        'Property:';
 KW_OR:              'or';
 KW_WITH:            'with';
 KW_MUST_BE:         'must be';
