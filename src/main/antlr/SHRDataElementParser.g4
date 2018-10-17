@@ -65,16 +65,16 @@ typeConstraint:     (simpleOrFQName | primitive | tbd) count;
 
 //elementWithConstraint
 
-elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | primitive) elementConstraint?;
+elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | primitive) count? elementConstraint?;
 // NOTE: not supporting _Value in subpath for now because that requires more significant work to support it in
 // the importer, models, and other tooling.
 elementPath:                (specialWord | simpleOrFQName) (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
 elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementWithUnitsConstraint;
 legacyWithCode:             KW_WITH? (KW_CONCEPT_CODE | simpleOrFQName); // Just here for backwards compatibility until definitions are updated
 elementCodeVSConstraint:    legacyWithCode? KW_FROM valueset OPEN_PAREN? bindingInfix? CLOSE_PAREN? KW_IF_COVERED?;
-elementCodeValueConstraint: KW_IS codeOrFQCode;
+elementCodeValueConstraint: EQUAL codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
-elementBooleanConstraint:   KW_IS (KW_TRUE | KW_FALSE);
+elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
 elementTypeConstraint:      (KW_SUBSTITUTE | KW_VALUE_IS_TYPE) (simpleOrFQName | primitive | tbd);
 elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
 elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
