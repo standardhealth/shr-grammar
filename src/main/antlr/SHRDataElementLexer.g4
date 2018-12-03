@@ -14,13 +14,14 @@ KW_ABSTRACT:        'Abstract:';
 KW_ELEMENT:         'Element:';
 KW_ENTRY:           'Entry:';
 KW_PARENT:          'Parent:';
-KW_VALUE:           'Value:';
+KW_VALUE:           'Value';
 KW_CONCEPT:         'Concept:';
 KW_DESCRIPTION:     'Description:';
 KW_PROPERTY:        'Property:';
 KW_OR:              'or';
 KW_WITH:            'with';
 KW_MUST_BE:         'must be';
+KW_REQUIRED:        'required';
 KW_PREFERRED:       'preferred';
 KW_EXAMPLE:         'example';
 KW_EXTENSIBLE:      'extensible';
@@ -28,12 +29,12 @@ KW_FROM:            'from';
 KW_UNITS:           'units';
 KW_IS:              'is';
 KW_SUBSTITUTE:      'substitute';
-KW_VALUE_IS_TYPE:   'value is type';
 KW_INCLUDES:        'includes';
 KW_TRUE:            'true';
 KW_FALSE:           'false';
 KW_TBD:             'TBD';
 KW_TBD_CODE:        'TBD#TBD';
+KW_ONLY:            'only';
 
 // KEYWORDS for special constrainable items
 KW_BAR_ENTRY:       '_Entry';
@@ -47,6 +48,10 @@ STAR:               '*';
 OPEN_PAREN:         '(';
 CLOSE_PAREN:        ')';
 RANGE:              '..';
+PLUS:               '+';
+COLON:              ':';
+OPEN_BRACKET:       '[';
+CLOSE_BRACKET:      ']';
 
 // PATTERNS
 URL:                [a-z]+ '://' [a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;

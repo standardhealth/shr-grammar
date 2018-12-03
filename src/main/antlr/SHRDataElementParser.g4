@@ -30,19 +30,16 @@ abstractHeader:     KW_ABSTRACT simpleName;
 elementProps:       elementProp+;
 elementProp:        parentProp | conceptProp | descriptionProp;
 
-values:             value? field*;
+values:             value? valueWithConstraint* field*;
 
-value:              KW_VALUE valueType (KW_OR valueType)*;
+value:              KW_VALUE COLON valueType (KW_OR valueType)*;
 valueType:          simpleOrFQName | primitive | elementWithConstraint | tbd;
 
-field:              propertyField | constraintField;
-fieldType:          propertyFieldType | constraintFieldType;
 
-propertyField:              KW_PROPERTY? fieldType (KW_OR fieldType)* count?;
+field:              propertyField | elementWithConstraint;
+
+propertyField:              KW_PROPERTY? propertyFieldType count;
 propertyFieldType:          specialWord | simpleOrFQName | tbd;
-
-constraintField:              fieldType (KW_OR fieldType)* count?;
-constraintFieldType:          specialWord | simpleOrFQName | elementWithConstraint | tbd;
 
 parentProp:         KW_PARENT (simpleOrFQName | tbd);
 conceptProp:        KW_CONCEPT (concepts | tbd);
@@ -60,22 +57,25 @@ simpleOrFQName:     simpleName | fullyQualifiedName;
 code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
-bindingInfix:       KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE;
+bindingInfix:       KW_REQUIRED | KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE;
 typeConstraint:     (simpleOrFQName | primitive | tbd) count;
 
 //elementWithConstraint
 
-elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | primitive) count? elementConstraint?;
+elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | primitive) (count | elementConstraint)?;
+valueWithConstraint:      KW_VALUE (count | elementConstraint)?;
+
 // NOTE: not supporting _Value in subpath for now because that requires more significant work to support it in
 // the importer, models, and other tooling.
 elementPath:                (specialWord | simpleOrFQName) (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
+elementBracketPath:         (specialWord | simpleOrFQName) (((OPEN_BRACKET simpleName CLOSE_BRACKET)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
 elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementWithUnitsConstraint | elementUrlConstraint;
 legacyWithCode:             KW_WITH? (KW_CONCEPT_CODE | simpleOrFQName); // Just here for backwards compatibility until definitions are updated
 elementCodeVSConstraint:    legacyWithCode? KW_FROM valueset OPEN_PAREN? bindingInfix? CLOSE_PAREN? KW_IF_COVERED?;
 elementCodeValueConstraint: EQUAL codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
 elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
-elementTypeConstraint:      (KW_SUBSTITUTE | KW_VALUE_IS_TYPE) (simpleOrFQName | primitive | tbd);
+elementTypeConstraint:      (KW_SUBSTITUTE | KW_ONLY) (simpleOrFQName | primitive | tbd);
 elementUrlConstraint:       EQUAL URL;
 elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
 elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
