@@ -26,7 +26,6 @@ KW_PREFERRED:       'preferred';
 KW_EXAMPLE:         'example';
 KW_EXTENSIBLE:      'extensible';
 KW_FROM:            'from';
-KW_UNITS:           'units';
 KW_IS:              'is';
 KW_SUBSTITUTE:      'substitute';
 KW_INCLUDES:        'includes';
@@ -35,6 +34,7 @@ KW_FALSE:           'false';
 KW_TBD:             'TBD';
 KW_TBD_CODE:        'TBD#TBD';
 KW_ONLY:            'only';
+KW_CODED_CONCEPT:   'concept';
 
 // KEYWORDS for special constrainable items
 KW_BAR_ENTRY:       '_Entry';

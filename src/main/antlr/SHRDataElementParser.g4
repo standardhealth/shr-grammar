@@ -50,7 +50,7 @@ descriptionProp:    KW_DESCRIPTION STRING;
 
 version:            WHOLE_NUMBER DOT WHOLE_NUMBER;
 namespace:          LOWER_WORD | DOT_SEPARATED_LW;
-specialWord:        KW_BAR_ENTRY | KW_BAR_VALUE ;
+specialWord:        KW_BAR_ENTRY | KW_BAR_VALUE | KW_VALUE;
 simpleName:         UPPER_WORD | ALL_CAPS | LOWER_WORD; //LOWER_WORD is not intended use, and will throw an error. However, this prevents compiler crash.
 fullyQualifiedName: DOT_SEPARATED_UW;
 simpleOrFQName:     simpleName | fullyQualifiedName;
@@ -62,27 +62,28 @@ typeConstraint:     (simpleOrFQName | primitive | tbd) count;
 
 //elementWithConstraint
 
-elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | primitive) (count | elementConstraint)?;
+elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | elementBracketPath | primitive) (count | elementConstraint)?;
 valueWithConstraint:      KW_VALUE (count | elementConstraint)?;
 
 // NOTE: not supporting _Value in subpath for now because that requires more significant work to support it in
 // the importer, models, and other tooling.
 elementPath:                (specialWord | simpleOrFQName) (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
-elementBracketPath:         (specialWord | simpleOrFQName) (((OPEN_BRACKET simpleName CLOSE_BRACKET)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
-elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementWithUnitsConstraint | elementUrlConstraint;
-legacyWithCode:             KW_WITH? (KW_CONCEPT_CODE | simpleOrFQName); // Just here for backwards compatibility until definitions are updated
-elementCodeVSConstraint:    legacyWithCode? KW_FROM valueset OPEN_PAREN? bindingInfix? CLOSE_PAREN? KW_IF_COVERED?;
+//elementBracketPath:         (specialWord | simpleOrFQName) (((OPEN_BRACKET simpleName CLOSE_BRACKET)+ (DOT primitive)?) | ((OPEN_BRACKET simpleName CLOSE_BRACKET)* DOT primitive) | ((DOT simpleName)* OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)| ((DOT simpleName)* DOT primitive));
+//elementAllBrackets:           (specialWord | simpleOrFQName) (((OPEN_BRACKET simpleName CLOSE_BRACKET)+ (OPEN_BRACKET primitive CLOSE_BRACKET)?) | ((OPEN_BRACKET simpleName CLOSE_BRACKET)* OPEN_BRACKET primitive CLOSE_BRACKET));
+elementBracketPath:         (specialWord | simpleOrFQName) (OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)* (DOT simpleName (OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)*)*;
+elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementUrlConstraint;
+elementCodeVSConstraint:    (KW_CODED_CONCEPT | simpleOrFQName)? KW_FROM valueset OPEN_PAREN? bindingInfix? CLOSE_PAREN? KW_IF_COVERED?;
 elementCodeValueConstraint: EQUAL codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
 elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
 elementTypeConstraint:      (KW_SUBSTITUTE | KW_ONLY) (simpleOrFQName | primitive | tbd);
 elementUrlConstraint:       EQUAL URL;
 elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
-elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
+//elementWithUnitsConstraint: DOT KW_UNITS EQUAL fullyQualifiedCode;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
                     | KW_DATE_TIME | KW_TIME | KW_CONCEPT_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
-                    | KW_POSITIVE_INT | KW_XHTML;
+                    | KW_POSITIVE_INT | KW_XHTML | KW_CODED_CONCEPT;
 count:              WHOLE_NUMBER RANGE (WHOLE_NUMBER | STAR);
 tbd:                KW_TBD STRING?;
 tbdCode:            KW_TBD_CODE STRING?;
