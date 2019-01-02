@@ -57,10 +57,8 @@ simpleOrFQName:     simpleName | fullyQualifiedName;
 code:               CODE STRING?;
 fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
-bindingInfix:       KW_REQUIRED | KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE;
+bindingStrength:       KW_REQUIRED | KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE;
 typeConstraint:     (simpleOrFQName | primitive | tbd) count;
-
-//elementWithConstraint
 
 elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | elementBracketPath | primitive) (count | elementConstraint)?;
 valueWithConstraint:      KW_VALUE (count | elementConstraint)?;
@@ -72,14 +70,13 @@ elementPath:                (specialWord | simpleOrFQName) (((DOT simpleName)+ (
 //elementAllBrackets:           (specialWord | simpleOrFQName) (((OPEN_BRACKET simpleName CLOSE_BRACKET)+ (OPEN_BRACKET primitive CLOSE_BRACKET)?) | ((OPEN_BRACKET simpleName CLOSE_BRACKET)* OPEN_BRACKET primitive CLOSE_BRACKET));
 elementBracketPath:         (specialWord | simpleOrFQName) (OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)* (DOT simpleName (OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)*)*;
 elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementUrlConstraint;
-elementCodeVSConstraint:    (KW_CODED_CONCEPT | simpleOrFQName)? KW_FROM valueset OPEN_PAREN? bindingInfix? CLOSE_PAREN? KW_IF_COVERED?;
+elementCodeVSConstraint:    (KW_CODED_CONCEPT | simpleOrFQName)? KW_FROM valueset (OPEN_PAREN bindingStrength CLOSE_PAREN)?;
 elementCodeValueConstraint: EQUAL codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
 elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
 elementTypeConstraint:      (KW_SUBSTITUTE | KW_ONLY) (simpleOrFQName | primitive | tbd);
 elementUrlConstraint:       EQUAL URL;
 elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
-//elementWithUnitsConstraint: DOT KW_UNITS EQUAL fullyQualifiedCode;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
                     | KW_DATE_TIME | KW_TIME | KW_CONCEPT_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
