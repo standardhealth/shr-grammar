@@ -20,7 +20,6 @@ KW_DESCRIPTION:     'Description:';
 KW_PROPERTY:        'Property:';
 KW_OR:              'or';
 KW_WITH:            'with';
-KW_MUST_BE:         'must be';
 KW_REQUIRED:        'required';
 KW_PREFERRED:       'preferred';
 KW_EXAMPLE:         'example';
