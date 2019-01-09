@@ -16,7 +16,7 @@ vocabularyDefs:     vocabularyDef+;
 vocabularyDef:      KW_VOCABULARY ALL_CAPS EQUAL (URL | URN_OID | URN); // (KW_VOCAB_VERSION WHOLE_NUMBER DOT WHOLE_NUMBER)?;
 
 dataDefs:           dataDef*;
-dataDef:            elementDef | entryDef;
+dataDef:            elementDef | entryDef | abstractDef;
 
 elementDef:         elementHeader elementProps? values;
 elementHeader:      KW_ELEMENT simpleName;
@@ -39,7 +39,7 @@ valueType:          simpleOrFQName | primitive | elementWithConstraint | tbd;
 field:              propertyField | elementWithConstraint;
 
 propertyField:              KW_PROPERTY? propertyFieldType count;
-propertyFieldType:          specialWord | simpleOrFQName | tbd;
+propertyFieldType:          specialWord | simpleOrFQName | tbd | KW_CODED_CONCEPT;
 
 parentProp:         KW_PARENT (simpleOrFQName | tbd);
 conceptProp:        KW_CONCEPT (concepts | tbd);
