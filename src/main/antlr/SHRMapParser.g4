@@ -30,7 +30,7 @@ fullyQualifiedName: DOT_SEPARATED_UW;
 simpleOrFQName:     simpleName | fullyQualifiedName;
 
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
-                    | KW_DATE_TIME | KW_TIME | KW_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
+                    | KW_DATE_TIME | KW_TIME | KW_CONCEPT_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
                     | KW_POSITIVE_INT | KW_XHTML;
 count:              WHOLE_NUMBER RANGE (WHOLE_NUMBER | STAR);
 tbd:                KW_TBD STRING?;
