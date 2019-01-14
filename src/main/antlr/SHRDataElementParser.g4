@@ -38,8 +38,8 @@ valueType:          simpleOrFQName | primitive | elementWithConstraint | tbd;
 
 field:              propertyField | elementWithConstraint;
 
-propertyField:              KW_PROPERTY? propertyFieldType count;
-propertyFieldType:          specialWord | simpleOrFQName | tbd | KW_CODED_CONCEPT;
+propertyField:              KW_PROPERTY propertyFieldType count;
+propertyFieldType:          specialWord | simpleOrFQName | tbd;
 
 parentProp:         KW_PARENT (simpleOrFQName | tbd);
 conceptProp:        KW_CONCEPT (concepts | tbd);
@@ -61,16 +61,14 @@ bindingStrength:    KW_REQUIRED | KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE;
 typeConstraint:     (simpleOrFQName | primitive | tbd) count;
 
 elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | elementBracketPath | primitive) (count | elementConstraint)?;
-valueWithConstraint:      KW_VALUE (count | elementConstraint)?;
+valueWithConstraint:      KW_VALUE elementConstraint?;
 
 // NOTE: not supporting _Value in subpath for now because that requires more significant work to support it in
 // the importer, models, and other tooling.
 elementPath:                (specialWord | simpleOrFQName) (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
-//elementBracketPath:         (specialWord | simpleOrFQName) (((OPEN_BRACKET simpleName CLOSE_BRACKET)+ (DOT primitive)?) | ((OPEN_BRACKET simpleName CLOSE_BRACKET)* DOT primitive) | ((DOT simpleName)* OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)| ((DOT simpleName)* DOT primitive));
-//elementAllBrackets:           (specialWord | simpleOrFQName) (((OPEN_BRACKET simpleName CLOSE_BRACKET)+ (OPEN_BRACKET primitive CLOSE_BRACKET)?) | ((OPEN_BRACKET simpleName CLOSE_BRACKET)* OPEN_BRACKET primitive CLOSE_BRACKET));
 elementBracketPath:         (specialWord | simpleOrFQName) (OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)* (DOT simpleName (OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)*)*;
 elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementUrlConstraint;
-elementCodeVSConstraint:    (KW_CODED_CONCEPT | simpleOrFQName)? KW_FROM valueset (OPEN_PAREN bindingStrength CLOSE_PAREN)?;
+elementCodeVSConstraint:    KW_FROM valueset (OPEN_PAREN bindingStrength CLOSE_PAREN)?;
 elementCodeValueConstraint: EQUAL codeOrFQCode;
 elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
 elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
@@ -80,7 +78,7 @@ elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
 valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
                     | KW_DATE_TIME | KW_TIME | KW_CONCEPT_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
-                    | KW_POSITIVE_INT | KW_XHTML | KW_CODED_CONCEPT;
+                    | KW_POSITIVE_INT | KW_XHTML;
 count:              WHOLE_NUMBER RANGE (WHOLE_NUMBER | STAR);
 tbd:                KW_TBD STRING?;
 tbdCode:            KW_TBD_CODE STRING?;
