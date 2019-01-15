@@ -1,0 +1,10 @@
+Grammar:           DataElement 6.0
+Namespace:         oncocore
+Description:       "SHR implementation of ASCO requirements."
+
+Entry: ECOGPerformanceStatus Parent: SimpleNonLaboratoryObservation Concept: LNC#89247-1 "ECOG Performance Status score"
+Description:       "The Eastern Cooperative Oncology Group (ECOG) performance status grade or score, which indicates a patient’s level of daily functioning and physical ability. Source: LOINC"
+FindingResult only IntegerQuantity SpecificFocusOfFinding 0..0AnatomicalLocation 0..0
+Interpretation from http://loinc.org/vs/LL529-9 (required)
+Device 0..0
+Media 0..0

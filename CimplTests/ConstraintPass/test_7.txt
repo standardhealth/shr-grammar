@@ -1,0 +1,29 @@
+Grammar:           DataElement 6.0
+Namespace:         oncocore
+Description:       "SHR implementation of ASCO requirements."
+Uses:              shr.base, shr.core, shr.entity, shr.procedure, shr.medication
+CodeSystem:        SCT = http://snomed.info/sct
+CodeSystem:        LNC = http://loinc.org
+CodeSystem:        MTH = http://ncimeta.nci.nih.gov
+CodeSystem:        UCUM = http://unitsofmeasure.org
+
+Entry:             CancerProgression
+Parent:            CodedNonLaboratoryObservation
+Concept:           SCT#246453008 "Course of illness (attribute)"
+Description:       "The course of a disease, such as cancer, as it becomes worse or spreads in the body. (source: NCI Dictionary)"
+Property:          CancerProgressionEvidence 0..*
+FindingResult from CancerProgressionVS (required)
+FindingTopicCode = SCT#246453008 "Course of illness (attribute)"
+SpecificFocusOfFinding[InformationItem] substitute CancerDisorderPresent AnatomicalLocation 0..0 Device 0..0
+
+Element:           StageTiming
+Parent:            CodedNonIndependentFinding
+Concept:           SCT#260869008 "Timing of stage"
+Description:       "Indicates when the staging was done, in terms of treatment landmarks."
+FindingResult from StageTimingPrefixVS (required) FindingTopicCode = SCT#260869008 "Timing of stage"
+
+Element:           ClinicalStageTiming
+Parent:            StageTiming
+Concept:           SCT#260869008 "Timing of stage"
+Description:       "Indicates staging was done from clinical evidence."
+FindingResult = SCT#385349001 "Clinical stage (observable entity)"

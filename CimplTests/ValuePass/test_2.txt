@@ -1,0 +1,13 @@
+Grammar:           DataElement 6.0
+Namespace:         oncocore
+Description:       "SHR implementation of ASCO requirements."
+Uses:              shr.base, shr.core, shr.entity, shr.procedure, shr.medication
+CodeSystem:        SCT = http://snomed.info/sct
+CodeSystem:        LNC = http://loinc.org
+CodeSystem:        MTH = http://ncimeta.nci.nih.gov
+CodeSystem:        UCUM = http://unitsofmeasure.org
+
+Element:           TreatmentIntent
+Concept:           SCT#395077000 "Treatment intent (situation)"
+Description:       "The intended result from a given treatment.  Examples include curative, palliative, and supportive."
+Value:             concept from TreatmentIntentVS (required)

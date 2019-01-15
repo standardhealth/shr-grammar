@@ -1,0 +1,5 @@
+Grammar:      DataElement 5.5
+Namespace: something
+Description: "some testing material"
+Uses:              a,b,b
+CodeSystem:        CODER = http://www.link.com

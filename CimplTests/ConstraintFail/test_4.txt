@@ -1,0 +1,16 @@
+Grammar:           DataElement 6.0
+Namespace:         oncocore
+Description:       "SHR implementation of ASCO requirements."
+Uses:              shr.base, shr.core, shr.entity, shr.procedure, shr.medication
+CodeSystem:        SCT = http://snomed.info/sct
+CodeSystem:        LNC = http://loinc.org
+CodeSystem:        MTH = http://ncimeta.nci.nih.gov
+CodeSystem:        UCUM = http://unitsofmeasure.org
+
+Entry:             TNMPathologicPrimaryTumorClassification
+Parent:            CodedNonLaboratoryObservation
+Concept:           LNC#21899-0 "Primary tumor.pathology Cancer"
+                   FindingResult from http://loinc.org/vs/LL232-0 (required)
+                   FindingTopicCode = LNC#21899-0 "Primary tumor.pathology Cancer"
+                   SpecificFocusOfFinding[InformationItem] substitute CancerDisorderPresent
+                   FindingMethod from TNMTumorStagingSystemVS if covered
