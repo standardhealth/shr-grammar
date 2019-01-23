@@ -69,6 +69,141 @@ public class Grammar6Tests {
         assertThat(errors, is(emptyArray()));
     }
 
+    @Test
+    public void testCommentsFail() {
+        String[] errors = parsePath("CommentsFail/test.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input '<EOF>'"));
+
+        errors = parsePath("CommentsFail/test2.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input 'Description:'"));
+    }
+
+    @Test
+    public void testCommentsPass() {
+        String[] errors = parsePath("CommentsPass");
+        assertThat(errors, is(emptyArray()));
+    }
+
+    @Test
+    public void testConstraintFail() {
+        String[] errors = parsePath("ConstraintFail/test.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("extraneous input 'is'"));
+
+        errors = parsePath("ConstraintFail/test_2.txt");
+        assertThat(errors, is(arrayWithSize(2)));
+        assertThat(errors[0], startsWith("missing ')' at 'Interpretation'"));
+        assertThat(errors[1], startsWith("extraneous input 'required' expecting"));
+
+        errors = parsePath("ConstraintFail/test_3.txt");
+        assertThat(errors, is(arrayWithSize(2)));
+        assertThat(errors[0], startsWith("mismatched input 'Extensible'"));
+        assertThat(errors[1], startsWith("mismatched input 'Example'"));
+    }
+
+    @Test
+    public void testConstraintPass() {
+        String[] errors = parsePath("ConstraintPass");
+        assertThat(errors, is(emptyArray()));
+    }
+
+    @Test
+    public void testDescriptionFail() {
+        String[] errors = parsePath("DescriptionTestFail/test.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input 'This' expecting STRING"));
+
+        errors = parsePath("DescriptionTestFail/test_2.txt");
+        assertThat(errors, is(arrayWithSize(2)));
+        assertThat(errors[0], startsWith("token recognition error at:"));
+        assertThat(errors[1], startsWith("mismatched input 'Description:' expecting 'Namespace:'"));
+    }
+
+    @Test
+    public void testDescriptionPass() {
+        String[] errors = parsePath("DescriptionTestPass");
+        assertThat(errors, is(emptyArray()));
+    }
+
+    @Test
+    public void testEntryFail() {
+        String[] errors = parsePath("EntryFail/test.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("extraneous input '1'"));
+
+        errors = parsePath("EntryFail/test_2.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input 'text' expecting"));
+
+        errors = parsePath("EntryFail/test_3.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input 'Required' expecting"));
+    }
+
+    @Test
+    public void testEntryPass() {
+        String[] errors = parsePath("EntryPass");
+        assertThat(errors, is(emptyArray()));
+    }
+
+    @Test
+    public void testGrammarFail() {
+        String[] errors = parsePath("GrammarTestFail/test.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input '.' expecting 'Namespace:'"));
+
+        errors = parsePath("GrammarTestFail/test_2.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input 'Data' expecting 'DataElement'"));
+
+        errors = parsePath("GrammarTestFail/test_3.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input 'Data' expecting 'DataElement'"));
+
+        errors = parsePath("GrammarTestFail/test_4.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input 'A' expecting WHOLE_NUMBER"));
+
+        errors = parsePath("GrammarTestFail/test_5.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("mismatched input 'Namespace:' expecting '.'"));
+    }
+
+    @Test
+    public void testGrammarPass() {
+        String[] errors = parsePath("GrammarTestPass");
+        assertThat(errors, is(emptyArray()));
+    }
+
+    @Test
+    public void testValueFail() {
+        String[] errors = parsePath("ValueFail/test.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("no viable alternative at input ':'"));
+
+        errors = parsePath("ValueFail/test_2.txt");
+        assertThat(errors, is(arrayWithSize(10)));
+        for(int i = 0; i < 10; i++) {
+          assertThat(errors[i], startsWith("token recognition error at: '|'"));
+        }
+
+        errors = parsePath("ValueFail/test_3.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("token recognition error"));
+
+        errors = parsePath("ValueFail/test_4.txt");
+        assertThat(errors, is(arrayWithSize(1)));
+        assertThat(errors[0], startsWith("no viable alternative at input"));
+    }
+
+    @Test
+    public void testValuePass() {
+        String[] errors = parsePath("ValuePass");
+        assertThat(errors, is(emptyArray()));
+    }
+
     private String[] parsePath(String stringPath) {
         Path path;
         try {
