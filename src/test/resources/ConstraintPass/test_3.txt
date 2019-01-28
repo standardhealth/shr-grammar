@@ -1,0 +1,16 @@
+Grammar:           DataElement 6.0
+Namespace:         brca
+Description:       "SHR implementation of ASCO requirements."
+Uses:              shr.core, shr.entity, oncocore, shr.base
+
+Entry:             MammaprintRecurrenceScore
+Parent:            SimpleLaboratoryObservation
+Concept:           MTH#C2827401
+Description:       "Breast cancer genomic signature assay for 10-year risk of distant recurrence score calculated by Mammaprint.
+In the United States, MammaPrint can only be used on cancers that are stage I or stage II, invasive, smaller than 5 centimeters, and estrogen-receptor-positive or -negative. Scores range from -1.0 to +1.0, with scores less than 0 indicating high risk, and scores greater than 0 indicating low risk.
+The is currently no LOINC code for Mammaprint test."
+                   FindingResult only Quantity
+                   FindingTopicCode = MTH#C2827401
+                   Interpretation from RecurrenceRiskScoreInterpretationVS (required)
+                   Specimen substitute BreastSpecimen
+                   DiagnosticService = #pathology

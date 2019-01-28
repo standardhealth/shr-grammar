@@ -1,0 +1,17 @@
+Grammar:           DataElement 6.0
+Namespace:         a
+Description:       "SHR implementation of ASCO requirements."
+Uses:              shr.core, shr.entity, oncocore, shr.base
+CodeSystem:        UCUM = http://unitsofmeasure.org
+CodeSystem:        LNC = http://loinc.org
+CodeSystem:        SCT = http://snomed.info/sct
+CodeSystem:        MTH = http://ncimeta.nci.nih.gov
+
+Entry:             BreastSite
+Parent:            AnatomicalLocationStructured
+Description:       "A body site specific to the breast structure."
+                   AnatomicalLocationOrLandmarkCode from BreastSiteVS (required)
+                   Laterality 1..1
+                   DistanceFromLandmark[Distance].Units = UCUM#cm
+                   AnatomicalDirection 0..0
+                   Testing[Test].Test[Test].A.B[C].D[abcd][efghi].Te.U[v].w 2..3

@@ -1,0 +1,5 @@
+Grammar:      DataElement 5.5
+Namespace: something
+Description: "some testing material"
+Uses:              a,b,b
+CodeSystem: AB = url:oid:5:.234.5678.9

@@ -1,0 +1,20 @@
+Grammar:           DataElement 6.0
+Namespace:         odh
+Description:       "Patient’s or family member's work information."
+Uses:              shr.base, shr.encounter, shr.core, shr.entity
+CodeSystem:        LNC = http://loinc.org
+CodeSystem:        OBSCAT = http://hl7.org/fhir/observation-category
+CodeSystem:        SCT = http://snomed.info/sct
+
+Entry:             OccupationalDataForHealth
+Parent:            Composition
+Concept:           LNC#74166-0
+Description:       "Current and past activities for profit, wages, salary, or as a service to others."
+                   Section 1..1
+                   Section substitute OccupationalDataSection
+
+Entry:             ToxicAdverseDrugReaction
+Parent:            AdverseDrugReaction
+Concept:           MTH#C0542243
+Description:       "A grade 3 or 4 adverse reaction to medication, radiation treatment, or other therapy."
+                   Seriousness from ToxicSeriousnessVS (required)
