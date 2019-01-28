@@ -1,0 +1,27 @@
+Grammar:           DataElement 6.0
+Namespace:         shr.adverse
+Description:       "The CIMI Adverse domain contains definitions for describing adverse events and adverse reactions."
+Uses:              shr.core, shr.base, shr.entity, shr.medication, shr.research
+CodeSystem:        MTH = http://ncimeta.nci.nih.gov
+
+Element:           Seriousness
+Concept:           MTH#C2985911
+Description:       "A coded value specifying the level of injury suffered by the subject for whom the event is reported, using the CTCAE coding system."
+Value:             concept
+
+Element:           AdverseEvent
+Parent:            InformationItem
+Description:       "A record of an untoward or unexpected event in a patient under treatment, and which does not necessarily have to have a causal relationship with that treatment. Adverse events may capture either a workflow breach that may or may not result in harm, but must be documented for quality improvement purposes, or an adverse finding whether or not it can be traceable to an actual workflow breach."
+Property:          Patient 1..1
+Property:          Type 0..1
+Property:          OccurrenceTime 1..1
+Property:          Seriousness 1..1
+Property:          Outcome 0..1
+Property:          CommentOrDescription 0..1
+Property:          AdverseEventCondition 0..*
+Property:          CausalAttribution 0..*
+Property:          ActionTaken 0..*
+Property:          AssociatedStudy 0..1
+                   Type from MedDRAVS (required)
+                   Seriousness from SeriousnessVS (required)
+                   Outcome from http://hl7.org/fhir/ValueSet/adverse-event-outcome (required)

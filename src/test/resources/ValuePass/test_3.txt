@@ -1,0 +1,32 @@
+Grammar:           DataElement 6.0
+Namespace:         shr.adverse
+Description:       "The CIMI Adverse domain contains definitions for describing adverse events and adverse reactions."
+Uses:              shr.core, shr.base, shr.entity, shr.medication, shr.research
+CodeSystem:        MTH = http://ncimeta.nci.nih.gov
+
+Element:           Seriousness
+Concept:           MTH#C2985911
+Description:       "A coded value specifying the level of injury suffered by the subject for whom the event is reported, using the CTCAE coding system."
+Value:             concept
+
+
+Element:           AdverseEventCondition
+Concept:           MTH#C1280464
+Description:       "The condition, sign or symptom triggering the adverse event report."
+Property:          ConditionPresentAssertion 1..1
+
+Element:           CausalAttribution
+Concept:           MTH#C1510821 "Adverse Event Attribution to Product or ProcedurePerformed"
+Description:       "A possible cause of an observed adverse event, known or theorized. There can be more than one possible cause."
+Property:          PossibleCause 1..1
+Property:          CauseCategory 1..1
+Property:          Certainty 1..1
+Property:          RouteIntoBody 0..1
+
+Element:           PossibleCause
+Description:       "The possible cause of the adverse event."
+Value:             concept from http://hl7.org/fhir/ValueSet/substance-concept (preferred) or Substance or Medication or MedicationAdministered or MedicationStatement or Device
+
+Element:           CauseCategory
+Description:       "Whether the adverse event is attributed to a treatment, course of the disease, unrelated to either, or unknown."
+Value:             concept from AttributionCategoryVS (required)

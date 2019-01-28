@@ -1,0 +1,30 @@
+Grammar:           DataElement 6.0
+Namespace:         oncocore
+Description:       "SHR implementation of ASCO requirements."
+Uses:              shr.base, shr.core, shr.entity, shr.procedure, shr.medication
+
+Entry:             CancerStageInformation
+Parent:            Observation
+Concept:           SCT#258232002 "Cancer staging (tumor staging)"
+Description:       "The extent a cancer has spread in the body (source: NCI Dictionary of Cancer Terms)"
+                   FindingResult 0..0
+                   FindingTopicCode = SCT#258232002 "Cancer staging (tumor staging)"
+                   ExceptionValue 0..0
+                   ReferenceRange 0..0
+                   SpecificFocusOfFinding[InformationItem] substitute CancerDisorderPresent
+                   FindingMethod from CancerStagingSystemVS (required)
+                   NonIndependentFinding
+                   includes StageGroup 0..1
+                   includes StageTiming 0..1
+                   DeltaFlag 0..0
+                   AnatomicalLocation 0..0
+                   Device 0..0
+                   Specimen 0..0
+                   Media 0..0
+                   PanelMembers.Observation
+                   includes TNMClinicalPrimaryTumorClassification 0..1
+                   includes TNMClinicalRegionalNodesClassification 0..1
+                   includes TNMClinicalDistantMetastasesClassification 0..1
+                   includes TNMPathologicPrimaryTumorClassification 0..1
+                   includes TNMPathologicRegionalNodesClassification 0..1
+                   includes TNMPathologicDistantMetastasesClassification 0..1

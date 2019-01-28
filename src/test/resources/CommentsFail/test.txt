@@ -1,0 +1,7 @@
+Grammar:           DataElement 6.0
+Namespace:         odh
+Description:       "Patient’s or family member's work information."
+Uses:              shr.base, shr.encounter, shr.core, shr.entity
+CodeSystem:        LNC = http://loinc.org
+CodeSystem:        OBSCAT = http://hl7.org/fhir/observation-category
+CodeSystem:     // SCT = http://snomed.info/sct
