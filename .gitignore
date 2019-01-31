@@ -4,6 +4,6 @@ out
 /bin/
 /gen/
 /src/generated
-/src/main/antlr/SHRLexer.tokens
+/src/main/antlr/*.tokens
 build/
 .settings/

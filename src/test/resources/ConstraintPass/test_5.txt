@@ -1,0 +1,13 @@
+Grammar:           DataElement 6.0
+Namespace:         brca
+Description:       "SHR implementation of ASCO requirements."
+
+Element:           OccupationalDataSection
+Parent:            Section
+Description:       "Single section in the current OccupationalDataSummary, containing the person's history of employment and occupation, past and present."
+                   InformationItem
+                   includes PersonEmploymentStatus 0..*
+                   includes RetirementDate 0..*
+                   includes CombatZonePeriod 0..*
+                   includes UsualWork 0..1
+                   includes PastOrPresentJob 0..*

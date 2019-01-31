@@ -1,0 +1,15 @@
+Grammar:           DataElement 6.0
+Namespace:         odh
+Description:       "Patient’s or family member's work information."
+Uses:              shr.base, shr.encounter, shr.core, shr.entity
+
+Entry:             CombatZonePeriod
+Parent:            SocialHistoryObservation
+Concept:           LNC#87511-2
+Description:       "Self-reported date range(s) when a person worked in what is considered a combat zone; sometimes called a hazardous duty work.
+Both civilian workers, such as Department of Defense contractors, and military service members could have worked in combat zones. Multiple periods in combat zone should be recorded using multiple FHIR resources."
+Value = TimePeriod
+FindingTopicCode = LNC#87511-2
+RelevantTime 0..0
+NonIndependentFinding 0..0
+FocalSubjectModifier 0..0

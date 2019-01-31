@@ -1,0 +1,12 @@
+Grammar:           DataElement 6.0
+Namespace:         shr.adverse
+Description:       "The CIMI Adverse domain contains definitions for describing adverse events and adverse reactions."
+Uses:              shr.core, shr.base, shr.entity, shr.medication, shr.research
+
+Entry:             AdverseDrugReaction
+Parent:            AdverseEvent
+Description:       "A noxious and unintended response to a medicinal product. To be considered an ADR, a causal relationship must be at least suspected by the medical practitioner. The principal difference between an adverse drug reaction (ADR) an adverse event (AE) and is that a causal relationship is suspected for the ADR, but is not required for the AE. Adverse drug reactions are therefore a subset of adverse event reports."
+                   CausalAttribution 1..* CausalAttribution.PossibleCause substitute PossibleDrugCause
+
+Element: PossibleDrugCause Parent: PossibleCause Description: "Drug suspected as possible cause of the adverse event."
+Value: Medication or MedicationAdministered or MedicationStatement
