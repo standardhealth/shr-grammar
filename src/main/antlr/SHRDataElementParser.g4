@@ -65,11 +65,14 @@ valueWithConstraint:      KW_VALUE elementConstraint?;
 
 // NOTE: not supporting _Value in subpath for now because that requires more significant work to support it in
 // the importer, models, and other tooling.
-elementBracketPath:         (specialWord | simpleOrFQName) (OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)* (DOT simpleName (OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET)*)*;
+elementBracketPathFirstPart:    specialWord | simpleOrFQName;
+elementBracketPathSecondPart:   OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET;
+elementBracketPathThirdPart:    DOT simpleName elementBracketPathSecondPart*;
+elementBracketPath:             elementBracketPathFirstPart elementBracketPathSecondPart* elementBracketPathThirdPart*;
 elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementUrlConstraint;
 elementCodeVSConstraint:    KW_FROM valueset (OPEN_PAREN bindingStrength CLOSE_PAREN)?;
 elementCodeValueConstraint: EQUAL codeOrFQCode;
-elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
+elementIncludesCodeValueConstraint: (PLUS EQUAL codeOrFQCode)+;
 elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
 elementTypeConstraint:      (KW_SUBSTITUTE | KW_ONLY) (simpleOrFQName | primitive | tbd);
 elementUrlConstraint:       EQUAL URL;
