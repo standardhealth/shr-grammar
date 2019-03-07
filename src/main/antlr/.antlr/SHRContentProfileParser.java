@@ -272,20 +272,20 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(51); 
+			setState(53);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			do {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ALL_CAPS) | (1L << UPPER_WORD) | (1L << LOWER_WORD))) != 0)) {
 				{
 				{
 				setState(50);
 				contentDef();
 				}
 				}
-				setState(53); 
+				setState(55);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ALL_CAPS) | (1L << UPPER_WORD) | (1L << LOWER_WORD))) != 0) );
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -318,9 +318,9 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(55);
-			contentHeader();
 			setState(56);
+			contentHeader();
+			setState(57);
 			fields();
 			}
 		}
@@ -336,8 +336,8 @@ public class SHRContentProfileParser extends Parser {
 	}
 
 	public static class ContentHeaderContext extends ParserRuleContext {
-		public SimpleOrPathNameContext simpleOrPathName() {
-			return getRuleContext(SimpleOrPathNameContext.class,0);
+		public SimpleNameContext simpleName() {
+			return getRuleContext(SimpleNameContext.class,0);
 		}
 		public TerminalNode COLON() { return getToken(SHRContentProfileParser.COLON, 0); }
 		public ContentHeaderContext(ParserRuleContext parent, int invokingState) {
@@ -352,9 +352,9 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
-			simpleOrPathName();
 			setState(59);
+			simpleName();
+			setState(60);
 			match(COLON);
 			}
 		}
@@ -389,19 +389,19 @@ public class SHRContentProfileParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(64);
+			setState(65);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(61);
+					setState(62);
 					field();
 					}
 					} 
 				}
-				setState(66);
+				setState(67);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
@@ -437,9 +437,9 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(67);
-			simpleOrPathName();
 			setState(68);
+			simpleOrPathName();
+			setState(69);
 			flags();
 			}
 		}
@@ -474,17 +474,17 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71); 
+			setState(72); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(70);
+				setState(71);
 				flag();
 				}
 				}
-				setState(73); 
+				setState(74); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==KW_MUST_SUPPORT );
@@ -515,7 +515,7 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(75);
+			setState(76);
 			match(KW_MUST_SUPPORT);
 			}
 		}
@@ -548,11 +548,11 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
-			match(WHOLE_NUMBER);
 			setState(78);
-			match(DOT);
+			match(WHOLE_NUMBER);
 			setState(79);
+			match(DOT);
+			setState(80);
 			match(WHOLE_NUMBER);
 			}
 		}
@@ -583,7 +583,7 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(81);
+			setState(82);
 			_la = _input.LA(1);
 			if ( !(_la==LOWER_WORD || _la==DOT_SEPARATED_LW) ) {
 			_errHandler.recoverInline(this);
@@ -623,7 +623,7 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(83);
+			setState(84);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ALL_CAPS) | (1L << UPPER_WORD) | (1L << LOWER_WORD))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -670,21 +670,21 @@ public class SHRContentProfileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(86);
 			simpleName();
-			setState(88); 
+			setState(89); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(86);
-				match(DOT);
 				setState(87);
+				match(DOT);
+				setState(88);
 				simpleName();
 				}
 				}
-				setState(90); 
+				setState(91); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==DOT );
@@ -718,20 +718,20 @@ public class SHRContentProfileParser extends Parser {
 		SimpleOrPathNameContext _localctx = new SimpleOrPathNameContext(_ctx, getState());
 		enterRule(_localctx, 30, RULE_simpleOrPathName);
 		try {
-			setState(94);
+			setState(95);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(92);
+				setState(93);
 				simpleName();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(93);
+				setState(94);
 				pathName();
 				}
 				break;
@@ -749,29 +749,29 @@ public class SHRContentProfileParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23c\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23d\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
 		"\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\3\2\3\2\3\3"+
-		"\3\3\3\3\3\3\3\4\3\4\3\4\7\4-\n\4\f\4\16\4\60\13\4\3\5\3\5\3\5\3\6\6\6"+
-		"\66\n\6\r\6\16\6\67\3\7\3\7\3\7\3\b\3\b\3\b\3\t\7\tA\n\t\f\t\16\tD\13"+
-		"\t\3\n\3\n\3\n\3\13\6\13J\n\13\r\13\16\13K\3\f\3\f\3\r\3\r\3\r\3\r\3\16"+
-		"\3\16\3\17\3\17\3\20\3\20\3\20\6\20[\n\20\r\20\16\20\\\3\21\3\21\5\21"+
-		"a\n\21\3\21\2\2\22\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \2\4\3\2\f\r"+
-		"\3\2\n\f\2X\2\"\3\2\2\2\4%\3\2\2\2\6.\3\2\2\2\b\61\3\2\2\2\n\65\3\2\2"+
-		"\2\f9\3\2\2\2\16<\3\2\2\2\20B\3\2\2\2\22E\3\2\2\2\24I\3\2\2\2\26M\3\2"+
-		"\2\2\30O\3\2\2\2\32S\3\2\2\2\34U\3\2\2\2\36W\3\2\2\2 `\3\2\2\2\"#\5\4"+
-		"\3\2#$\5\6\4\2$\3\3\2\2\2%&\7\3\2\2&\'\7\4\2\2\'(\5\30\r\2(\5\3\2\2\2"+
-		")*\5\b\5\2*+\5\n\6\2+-\3\2\2\2,)\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2"+
-		"\2/\7\3\2\2\2\60.\3\2\2\2\61\62\7\5\2\2\62\63\5\32\16\2\63\t\3\2\2\2\64"+
-		"\66\5\f\7\2\65\64\3\2\2\2\66\67\3\2\2\2\67\65\3\2\2\2\678\3\2\2\28\13"+
-		"\3\2\2\29:\5\16\b\2:;\5\20\t\2;\r\3\2\2\2<=\5 \21\2=>\7\b\2\2>\17\3\2"+
-		"\2\2?A\5\22\n\2@?\3\2\2\2AD\3\2\2\2B@\3\2\2\2BC\3\2\2\2C\21\3\2\2\2DB"+
-		"\3\2\2\2EF\5 \21\2FG\5\24\13\2G\23\3\2\2\2HJ\5\26\f\2IH\3\2\2\2JK\3\2"+
-		"\2\2KI\3\2\2\2KL\3\2\2\2L\25\3\2\2\2MN\7\6\2\2N\27\3\2\2\2OP\7\t\2\2P"+
-		"Q\7\7\2\2QR\7\t\2\2R\31\3\2\2\2ST\t\2\2\2T\33\3\2\2\2UV\t\3\2\2V\35\3"+
-		"\2\2\2WZ\5\34\17\2XY\7\7\2\2Y[\5\34\17\2ZX\3\2\2\2[\\\3\2\2\2\\Z\3\2\2"+
-		"\2\\]\3\2\2\2]\37\3\2\2\2^a\5\34\17\2_a\5\36\20\2`^\3\2\2\2`_\3\2\2\2"+
-		"a!\3\2\2\2\b.\67BK\\`";
+		"\3\3\3\3\3\3\3\4\3\4\3\4\7\4-\n\4\f\4\16\4\60\13\4\3\5\3\5\3\5\3\6\7\6"+
+		"\66\n\6\f\6\16\69\13\6\3\7\3\7\3\7\3\b\3\b\3\b\3\t\7\tB\n\t\f\t\16\tE"+
+		"\13\t\3\n\3\n\3\n\3\13\6\13K\n\13\r\13\16\13L\3\f\3\f\3\r\3\r\3\r\3\r"+
+		"\3\16\3\16\3\17\3\17\3\20\3\20\3\20\6\20\\\n\20\r\20\16\20]\3\21\3\21"+
+		"\5\21b\n\21\3\21\2\2\22\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \2\4\3"+
+		"\2\f\r\3\2\n\f\2Y\2\"\3\2\2\2\4%\3\2\2\2\6.\3\2\2\2\b\61\3\2\2\2\n\67"+
+		"\3\2\2\2\f:\3\2\2\2\16=\3\2\2\2\20C\3\2\2\2\22F\3\2\2\2\24J\3\2\2\2\26"+
+		"N\3\2\2\2\30P\3\2\2\2\32T\3\2\2\2\34V\3\2\2\2\36X\3\2\2\2 a\3\2\2\2\""+
+		"#\5\4\3\2#$\5\6\4\2$\3\3\2\2\2%&\7\3\2\2&\'\7\4\2\2\'(\5\30\r\2(\5\3\2"+
+		"\2\2)*\5\b\5\2*+\5\n\6\2+-\3\2\2\2,)\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3"+
+		"\2\2\2/\7\3\2\2\2\60.\3\2\2\2\61\62\7\5\2\2\62\63\5\32\16\2\63\t\3\2\2"+
+		"\2\64\66\5\f\7\2\65\64\3\2\2\2\669\3\2\2\2\67\65\3\2\2\2\678\3\2\2\28"+
+		"\13\3\2\2\29\67\3\2\2\2:;\5\16\b\2;<\5\20\t\2<\r\3\2\2\2=>\5\34\17\2>"+
+		"?\7\b\2\2?\17\3\2\2\2@B\5\22\n\2A@\3\2\2\2BE\3\2\2\2CA\3\2\2\2CD\3\2\2"+
+		"\2D\21\3\2\2\2EC\3\2\2\2FG\5 \21\2GH\5\24\13\2H\23\3\2\2\2IK\5\26\f\2"+
+		"JI\3\2\2\2KL\3\2\2\2LJ\3\2\2\2LM\3\2\2\2M\25\3\2\2\2NO\7\6\2\2O\27\3\2"+
+		"\2\2PQ\7\t\2\2QR\7\7\2\2RS\7\t\2\2S\31\3\2\2\2TU\t\2\2\2U\33\3\2\2\2V"+
+		"W\t\3\2\2W\35\3\2\2\2X[\5\34\17\2YZ\7\7\2\2Z\\\5\34\17\2[Y\3\2\2\2\\]"+
+		"\3\2\2\2][\3\2\2\2]^\3\2\2\2^\37\3\2\2\2_b\5\34\17\2`b\5\36\20\2a_\3\2"+
+		"\2\2a`\3\2\2\2b!\3\2\2\2\b.\67CL]a";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

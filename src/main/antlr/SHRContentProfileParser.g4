@@ -7,12 +7,12 @@ options { tokenVocab=SHRContentProfileLexer; }
 doc:                docHeader contentsDefs;
 docHeader:          KW_GRAMMAR KW_G_CONTENT_PROFILE version;
 
-contentsDefs:      (namespaceHeader contentDefs)*;
+contentsDefs:       (namespaceHeader contentDefs)*;
 namespaceHeader:    KW_NAMESPACE namespace;
 
-contentDefs:        contentDef+;
+contentDefs:        contentDef*;
 contentDef:         contentHeader fields;
-contentHeader:      simpleOrPathName COLON;
+contentHeader:      simpleName COLON;
 
 fields:             field*;
 field:              simpleOrPathName flags;
