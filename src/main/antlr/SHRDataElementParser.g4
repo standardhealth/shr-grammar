@@ -61,7 +61,6 @@ bindingStrength:    KW_REQUIRED | KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE;
 typeConstraint:     (simpleOrFQName | primitive | tbd) count;
 
 elementWithConstraint:      (specialWord | simpleOrFQName | elementBracketPath | primitive) (count | elementConstraint)?;
-//valueWithConstraint:      KW_VALUE elementConstraint?;
 
 // NOTE: not supporting _Value in subpath for now because that requires more significant work to support it in
 // the importer, models, and other tooling.
