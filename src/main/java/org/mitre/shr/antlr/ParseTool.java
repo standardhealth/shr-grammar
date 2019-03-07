@@ -43,10 +43,7 @@ public class ParseTool {
         }
 
         System.out.printf("\nParsing %s\n", path.toString());
-        if (path.toString().endsWith("_cp.txt")) {
-            System.out.println("SKIPPED: Content Profiles not supported.");
-            return;
-        } else if (!path.toString().endsWith(".txt")) {
+        if (!path.toString().endsWith(".txt")) {
             System.out.println("SKIPPED: Only .txt files supported.");
             return;
         }
@@ -65,6 +62,8 @@ public class ParseTool {
                 ((SHRValueSetParser) parser).doc();
             } else if (parser instanceof SHRMapParser) {
                 ((SHRMapParser) parser).doc();
+            } else if (parser instanceof SHRContentProfileParser) {
+                ((SHRContentProfileParser) parser).doc();
             } else {
                 throw new RuntimeException("Unrecognized Parser");
             }
@@ -79,6 +78,8 @@ public class ParseTool {
             return new SHRValueSetLexer(input);
         } else if (path.endsWith("_map.txt")) {
             return new SHRMapLexer(input);
+        } else if (path.endsWith("_cp.txt")) {
+            return new SHRContentProfileLexer(input);
         }
         return new SHRDataElementLexer(input);
     }
@@ -88,6 +89,8 @@ public class ParseTool {
             return new SHRValueSetParser(tokens);
         } else if (path.endsWith("_map.txt")) {
             return new SHRMapParser(tokens);
+        } else if (path.endsWith("_cp.txt")) {
+            return new SHRContentProfileParser(tokens);
         }
         return new SHRDataElementParser(tokens);
     }
