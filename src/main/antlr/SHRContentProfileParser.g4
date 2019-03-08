@@ -11,11 +11,11 @@ contentsDefs:       (namespaceHeader contentDefs)*;
 namespaceHeader:    KW_NAMESPACE namespace;
 
 contentDefs:        contentDef*;
-contentDef:         contentHeader fields;
+contentDef:         contentHeader cpRules;
 contentHeader:      simpleName COLON;
 
-fields:             field*;
-field:              simpleOrPathName flags;
+cpRules:            cpRule*;
+cpRule:             simpleOrPathName flags;
 
 flags:              flag+;
 flag:               KW_MUST_SUPPORT;
