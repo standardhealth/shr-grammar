@@ -13,4 +13,4 @@ The is currently no LOINC code for Mammaprint test."
                    FindingTopicCode = MTH#C2827401
                    Interpretation from RecurrenceRiskScoreInterpretationVS (required)
                    Specimen substitute BreastSpecimen
-                   DiagnosticService = #pathology
+                   DiagnosticService = DSCODES#pathology

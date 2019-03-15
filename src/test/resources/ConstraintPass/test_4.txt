@@ -11,7 +11,7 @@ No LOINC code currently exists for this test. We are seeking feedback on the val
                    FindingTopicCode = MTH#C3898101
                    Interpretation from RecurrenceRiskScoreInterpretationVS (extensible)
                    Specimen substitute BreastSpecimen
-                   DiagnosticService = #pathology
+                   DiagnosticService = DS#pathology
 
 Entry:             ProsignaRecurrenceScore
 Parent:            SimpleLaboratoryObservation
@@ -23,4 +23,4 @@ The Prosigna Score is reported on a 0-100 scale (referred to as ROR Score or Ris
                    Interpretation from RecurrenceRiskScoreInterpretationVS (extensible)
                    Specimen substitute BreastSpecimen
                    Alpha substitute Beta
-                   DiagnosticService = #pathology
+                   DiagnosticService = DS#pathology
