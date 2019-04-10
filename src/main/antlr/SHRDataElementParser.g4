@@ -50,7 +50,7 @@ descriptionProp:    KW_DESCRIPTION STRING;
 
 version:            WHOLE_NUMBER DOT WHOLE_NUMBER;
 namespace:          LOWER_WORD | DOT_SEPARATED_LW;
-specialWord:        KW_BAR_ENTRY | KW_BAR_VALUE | KW_VALUE;
+specialWord:        KW_BAR_ENTRY | KW_VALUE;
 simpleName:         UPPER_WORD | ALL_CAPS | LOWER_WORD; //LOWER_WORD is not intended use, and will throw an error. However, this prevents compiler crash.
 fullyQualifiedName: DOT_SEPARATED_UW;
 simpleOrFQName:     simpleName | fullyQualifiedName;

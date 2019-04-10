@@ -36,7 +36,6 @@ KW_ONLY:            'only';
 
 // KEYWORDS for special constrainable items
 KW_BAR_ENTRY:       '_Entry';
-KW_BAR_VALUE:       '_Value';
 
 // SYMBOLS
 DOT:                '.';
