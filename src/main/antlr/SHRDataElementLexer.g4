@@ -54,5 +54,6 @@ CLOSE_BRACKET:      ']';
 URL:                [a-z]+ '://' [a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
 PATH_URL:           [A-Z][A-Z0-9]* '/' [0-9a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
 URN_OID:            'urn:oid:' [0-2]'.'[0-9]+('.'[0-9]+)*;
+URN_TBD:            'urn:tbd:' (':'[0-9a-zA-Z\\.]+)+;
 URN:                'urn' (':'[0-9a-zA-Z\\.]+)+;
 CODE:               '#' ~[, \r\t\n]+;
