@@ -16,7 +16,10 @@ vocabularyDefs:     vocabularyDef+;
 vocabularyDef:      KW_VOCABULARY ALL_CAPS EQUAL (URL | URN_OID | URN); // (KW_VOCAB_VERSION WHOLE_NUMBER DOT WHOLE_NUMBER)?;
 
 dataDefs:           dataDef*;
-dataDef:            elementDef | entryDef | abstractDef;
+dataDef:            elementDef | entryDef | abstractDef | groupDef;
+
+groupDef:           groupHeader elementProps?
+groupHeader:        KW_GROUP simpleName;
 
 elementDef:         elementHeader elementProps? values;
 elementHeader:      KW_ELEMENT simpleName;
@@ -77,7 +80,7 @@ elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
 elementTypeConstraint:      (KW_SUBSTITUTE | KW_ONLY) (simpleOrFQName | primitive | tbd);
 elementUrlConstraint:       EQUAL URL;
 elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
-valueset:           URL | PATH_URL | URN_OID | URN_TBD |simpleName | tbd;
+valueset:           URL | PATH_URL | URN_OID | URN |simpleName | tbd;
 primitive:          KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
                     | KW_DATE_TIME | KW_TIME | KW_CONCEPT_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
                     | KW_POSITIVE_INT | KW_XHTML;
