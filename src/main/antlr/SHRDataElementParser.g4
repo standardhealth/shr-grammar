@@ -18,7 +18,7 @@ vocabularyDef:      KW_VOCABULARY ALL_CAPS EQUAL (URL | URN_OID | URN); // (KW_V
 dataDefs:           dataDef*;
 dataDef:            elementDef | entryDef | abstractDef | groupDef;
 
-groupDef:           groupHeader elementProps?
+groupDef:           groupHeader elementProps?;
 groupHeader:        KW_GROUP simpleName;
 
 elementDef:         elementHeader elementProps? values;

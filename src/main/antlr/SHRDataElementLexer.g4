@@ -33,7 +33,7 @@ KW_FALSE:           'false';
 KW_TBD:             'TBD';
 KW_TBD_CODE:        'TBD#TBD';
 KW_ONLY:            'only';
-KW_GROUP:           'Group:'
+KW_GROUP:           'Group:';
 
 // KEYWORDS for special constrainable items
 KW_BAR_ENTRY:       '_Entry';
