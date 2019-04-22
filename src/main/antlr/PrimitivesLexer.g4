@@ -1,7 +1,7 @@
 lexer grammar PrimitivesLexer;
 
 // Common Lexer Definitions for FHIR primitives
-// Used by SHRDataElementLexer and SHRValueSetLexer
+// Used by SHRDataElementLexer, SHRMapLexer, SHRValueSetLexer, and SHRContentProfileLexer
 KW_BOOLEAN:         'boolean';
 KW_INTEGER:         'integer';
 KW_STRING:          'string';
