@@ -41,8 +41,8 @@ valueType:          simpleOrFQName | primitive | elementWithConstraint | tbd;
 
 field:              propertyField | elementWithConstraint;
 
-propertyField:              KW_PROPERTY propertyFieldType count;
-propertyFieldType:          specialWord | simpleOrFQName | tbd;
+propertyField:      KW_PROPERTY propertyFieldType count;
+propertyFieldType:  specialWord | simpleOrFQName | tbd;
 
 parentProp:         KW_PARENT (simpleOrFQName | tbd);
 conceptProp:        KW_CONCEPT (concepts | tbd);
