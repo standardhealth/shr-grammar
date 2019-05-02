@@ -35,8 +35,9 @@ elementProp:        parentProp | conceptProp | descriptionProp;
 
 values:             value? field*;
 
-value:              KW_VALUE COLON valueType (KW_OR valueType)*;
+value:              KW_VALUE (COLON | KW_ONLY) valueType (KW_OR valueType)*;
 valueType:          simpleOrFQName | primitive | elementWithConstraint | tbd;
+
 
 
 field:              propertyField | elementWithConstraint;
