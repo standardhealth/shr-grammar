@@ -12,7 +12,7 @@ KW_INSTANT:         'instant';
 KW_DATE:            'date';
 KW_DATE_TIME:       'dateTime';
 KW_TIME:            'time';
-KW_CODE:            'code';
+KW_CONCEPT_CODE:    'concept';
 KW_OID:             'oid';
 KW_ID:              'id';
 KW_MARKDOWN:        'markdown';

@@ -1,0 +1,9 @@
+Grammar:           DataElement 6.0
+Namespace:         a
+Uses:              shr.core, shr.entity, oncocore, shr.base
+
+Entry:             BreastSite
+                   AnatomicalLocationOrLandmarkCode from BreastSiteVS (required)
+                   DistanceFromLandmark[Distance].Units = UCUM#cm
+                   AnatomicalDirection.New.Another.One = UCUM#cm
+                   Testing[Test].Test[Test].A.B[C].D[abcd][efghi].Te.U[v].w 2..3

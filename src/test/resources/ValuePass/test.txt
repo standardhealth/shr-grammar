@@ -1,0 +1,12 @@
+Grammar:           DataElement 6.0
+Namespace:         brca
+Description:       "SHR implementation of ASCO requirements."
+
+Element:           ColdIschemiaTime
+Concept:           LNC#44778-9
+Description:       "The time period between the chilling of a tissue or tissue sample and the time it is warmed."
+Value:             TimePeriod
+
+Element:           MorphologyBehavior
+Description:       "A description of the morphology and behavioral characteristics of the cancer."
+Value:             concept
