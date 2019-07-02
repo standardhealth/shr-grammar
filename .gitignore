@@ -1,9 +1,13 @@
 .gradle
 shr-grammar.iws
+.classpath
+.project
+.vscode
 out
 /bin/
 /gen/
 /src/generated
 /src/main/antlr/*.tokens
+/src/main/antlr/.antlr
 build/
 .settings/
