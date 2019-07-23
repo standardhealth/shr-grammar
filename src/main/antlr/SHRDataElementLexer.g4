@@ -50,6 +50,7 @@ PLUS:               '+';
 COLON:              ':';
 OPEN_BRACKET:       '[';
 CLOSE_BRACKET:      ']';
+MINUS:              '-';
 
 // PATTERNS
 URL:                [a-z]+ '://' [a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
