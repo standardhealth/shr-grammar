@@ -80,7 +80,7 @@ elementIncludesCodeValueConstraint: (PLUS EQUAL fullyQualifiedCode)+;
 elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
 elementStringConstraint:    EQUAL STRING;
 elementIntegerConstraint:   EQUAL MINUS? WHOLE_NUMBER;
-elementDecimalConstraint:   EQUAL MINUS? WHOLE_NUMBER DOT WHOLE_NUMBER?;
+elementDecimalConstraint:   EQUAL MINUS? WHOLE_NUMBER DOT WHOLE_NUMBER? EXP?;
 elementTypeConstraint:      (KW_SUBSTITUTE | KW_ONLY) (simpleOrFQName | primitive | tbd);
 elementUrlConstraint:       EQUAL URL;
 elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
