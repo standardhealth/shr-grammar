@@ -78,8 +78,8 @@ elementCodeVSConstraint:    KW_FROM valueset (OPEN_PAREN bindingStrength CLOSE_P
 elementCodeValueConstraint: EQUAL fullyQualifiedCode;
 elementIncludesCodeValueConstraint: (PLUS EQUAL fullyQualifiedCode)+;
 elementBooleanConstraint:   EQUAL (KW_TRUE | KW_FALSE);
-elementStringConstraint:    EQUAL STRING;
-elementIntegerConstraint:   EQUAL MINUS? WHOLE_NUMBER;
+elementStringConstraint:    EQUAL STRING; // Can also be applied to fix a URI
+elementIntegerConstraint:   EQUAL MINUS? WHOLE_NUMBER; // Can also be applied to fix a decimal value
 elementDecimalConstraint:   EQUAL MINUS? WHOLE_NUMBER DOT WHOLE_NUMBER? EXP?;
 elementTypeConstraint:      (KW_SUBSTITUTE | KW_ONLY) (simpleOrFQName | primitive | tbd);
 elementUrlConstraint:       EQUAL URL;
