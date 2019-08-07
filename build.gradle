@@ -5,7 +5,7 @@ apply plugin: 'application'
 apply plugin: 'distribution'
 
 group = 'org.mitre.shr'
-version = '6.1.0'
+version = '6.2.0'
 sourceCompatibility = '1.8'
 
 mainClassName = 'org.mitre.shr.antlr.ParseTool'
