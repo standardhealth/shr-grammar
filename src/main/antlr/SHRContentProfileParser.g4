@@ -11,7 +11,7 @@ contentsDefs:       (namespaceHeader contentDefs)*;
 namespaceHeader:    KW_NAMESPACE namespace;
 
 contentDefs:        contentDef*;
-contentDef:         contentHeader cpRules;
+contentDef:         (contentHeader cpRules) | (contentHeader headerFlags);
 contentHeader:      simpleName COLON;
 
 cpRules:            cpRule*;
@@ -19,6 +19,9 @@ cpRule:             simpleOrPathName flags;
 
 flags:              flag+;
 flag:               KW_MUST_SUPPORT;
+
+headerFlags:        headerFlag+;
+headerFlag:         KW_NO_PROFILE;
 
 // COMMON BITS
 
