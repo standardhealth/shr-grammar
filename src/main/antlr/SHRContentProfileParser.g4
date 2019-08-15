@@ -8,7 +8,7 @@ doc:                docHeader contentsDefs;
 docHeader:          KW_GRAMMAR KW_G_CONTENT_PROFILE version;
 
 contentsDefs:       (namespaceHeader contentDefs)*;
-namespaceHeader:    KW_NAMESPACE namespace;
+namespaceHeader:    KW_NAMESPACE namespace (namespaceFlag)?;
 
 contentDefs:        contentDef*;
 contentDef:         (contentHeader cpRules) | (contentHeader headerFlags) | contentHeader;
@@ -22,6 +22,8 @@ flag:               KW_MUST_SUPPORT;
 
 headerFlags:        headerFlag+;
 headerFlag:         KW_NO_PROFILE;
+
+namespaceFlag:      KW_NO_PROFILE | KW_ALL_PRIMARY;
 
 // COMMON BITS
 
