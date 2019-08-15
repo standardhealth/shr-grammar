@@ -11,7 +11,7 @@ contentsDefs:       (namespaceHeader contentDefs)*;
 namespaceHeader:    KW_NAMESPACE namespace;
 
 contentDefs:        contentDef*;
-contentDef:         (contentHeader cpRules) | (contentHeader headerFlags);
+contentDef:         (contentHeader cpRules) | (contentHeader headerFlags) | contentHeader;
 contentHeader:      simpleName COLON;
 
 cpRules:            cpRule*;
