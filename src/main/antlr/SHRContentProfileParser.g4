@@ -8,7 +8,7 @@ doc:                docHeader contentsDefs;
 docHeader:          KW_GRAMMAR KW_G_CONTENT_PROFILE version;
 
 contentsDefs:       (namespaceHeader contentDefs)*;
-namespaceHeader:    KW_NAMESPACE namespace (namespaceFlag)?;
+namespaceHeader:    KW_NAMESPACE namespace namespaceFlag?;
 
 contentDefs:        contentDef*;
 contentDef:         (contentHeader cpRules) | (contentHeader headerFlags) | contentHeader;
