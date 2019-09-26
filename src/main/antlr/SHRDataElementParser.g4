@@ -63,6 +63,7 @@ fullyQualifiedCode: (ALL_CAPS code) | tbdCode;
 codeOrFQCode:       fullyQualifiedCode | code;
 bindingStrength:    KW_REQUIRED | KW_PREFERRED | KW_EXAMPLE| KW_EXTENSIBLE;
 typeConstraint:     (simpleOrFQName | primitive | tbd) count;
+subsetConstraint:   (simpleOrFQName | primitive | tbd);
 
 elementWithConstraint:      (specialWord | simpleOrFQName | elementBracketPath | primitive) (count | elementConstraint)?;
 //valueWithConstraint:      KW_VALUE elementConstraint?;
@@ -73,7 +74,7 @@ elementBracketPathFirstPart:    specialWord | simpleOrFQName;
 elementBracketPathSecondPart:   OPEN_BRACKET (simpleName | primitive) CLOSE_BRACKET;
 elementBracketPathThirdPart:    DOT simpleName elementBracketPathSecondPart*;
 elementBracketPath:             elementBracketPathFirstPart elementBracketPathSecondPart* elementBracketPathThirdPart*;
-elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementStringConstraint | elementIntegerConstraint | elementDecimalConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementUrlConstraint;
+elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementStringConstraint | elementIntegerConstraint | elementDecimalConstraint | elementTypeConstraint | elementSubsetConstraint | elementIncludesTypeConstraint | elementUrlConstraint;
 elementCodeVSConstraint:    KW_FROM valueset (OPEN_PAREN bindingStrength CLOSE_PAREN)?;
 elementCodeValueConstraint: EQUAL fullyQualifiedCode;
 elementIncludesCodeValueConstraint: (PLUS EQUAL fullyQualifiedCode)+;
@@ -82,6 +83,7 @@ elementStringConstraint:    EQUAL STRING; // Can also be applied to fix a URI
 elementIntegerConstraint:   EQUAL MINUS? WHOLE_NUMBER; // Can also be applied to fix a decimal value
 elementDecimalConstraint:   EQUAL MINUS? WHOLE_NUMBER DOT WHOLE_NUMBER? EXP?;
 elementTypeConstraint:      (KW_SUBSTITUTE | KW_ONLY) (simpleOrFQName | primitive | tbd);
+elementSubsetConstraint:    KW_ONLY (subsetConstraint) (KW_OR (subsetConstraint))+;
 elementUrlConstraint:       EQUAL URL;
 elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
 valueset:           URL | PATH_URL | URN_OID | URN |simpleName | tbd;
